@@ -43,3 +43,10 @@ User Account management
 ====================================
 
 1. DB Schema : all tables with columns and column types
+
+
+status -> boolean -> true/false
+created_at -> currrent timestamp
+updated_at -> current timestamp(on change)
+
+
