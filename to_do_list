@@ -1,0 +1,45 @@
+/******************************************* JOB-SITE PROJECT ******************************************/
+
+
+1. naukri.com
+
+3 types of user types
+
+1. Admin
+2. Client/company
+3. Candidate
+
+Admin View : 
+
+1. View All Jobs
+2. View all candidates and details
+3. view all company dashboards
+4. view all candidate's dashboard
+5. Actiavate/Deactivate company account
+6. Actiavate/Deactivate candidate account
+7. Update company account details
+8. Update candidate account details
+
+Client/Company view
+1. Post jobs
+2. View its posted jobs
+3. Applications received
+4. reject/accept applications
+5. message candidate
+
+
+Candidate view
+1. view all jobs
+2. View its applied jobs
+3. Applications sent
+4. retrieve application
+
+User Account management
+
+1. Resgiter
+2. Login
+3. Forgot password
+
+====================================
+
+1. DB Schema : all tables with columns and column types
