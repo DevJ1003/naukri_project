@@ -21,8 +21,8 @@ Admin View :
 8. Update candidate account details
 
 Client/Company view
-1. Post jobs
-2. View its posted jobs
+1. Post jobs - job create, edit, delete, view
+2. View its posted jobs - list view of all the jobs posted
 3. Applications received
 4. reject/accept applications
 5. message candidate

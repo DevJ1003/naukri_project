@@ -82,6 +82,13 @@ function fetch_array($result)
 
 
 
+
+
+/***************************************** REGISTER-LOGIN FUCNTION ****************************************/
+
+
+
+
 function register_user()
 {
 
@@ -90,8 +97,10 @@ function register_user()
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $user_type = $_POST['type'];
 
-        $query = query("INSERT INTO users(username, password, email, created_at) VALUES('{$username}'  , '{$password}' , '{$email}', now() ) ");
+
+        $query = query("INSERT INTO users(username, password, type, email, created_at) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', now() ) ");
         confirm($query);
 
         redirect("login.php");
@@ -119,7 +128,61 @@ function login_user()
             redirect("login.php");
         } else {
             $_SESSION['username'] = $username;
-            redirect("index.php");
+            redirect("admin");
         }
+    }
+}
+
+
+
+
+
+/*************************************** END OF REGISTER-LOGIN FUCNTION *************************************/
+
+
+
+
+
+
+
+/**************************************** ADMIN DATA FUCNTIONS ***********************************************/
+
+
+
+
+
+function get_jobs_in_user_admin()
+{
+
+
+    $query = query("SELECT * FROM jobs");
+    confirm($query);
+
+
+    while ($row = fetch_array($query)) {
+
+
+        $user_admin_job = <<<DELIMETER
+
+
+
+
+
+<tr>
+<td>{$row['id']}</td>
+<td>{$row['title']}</td>
+<td>{$row['company_name']}</td>
+<td>{$row['description']}</td>
+<td>{$row['salary']}</td>
+<td>{$row['location']}</td>
+</tr>
+
+
+
+
+
+DELIMETER;
+
+        echo $user_admin_job;
     }
 }
