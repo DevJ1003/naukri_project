@@ -15,7 +15,7 @@ include "functions.php";
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href=""><!-- title logo can be changed -->
 
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -73,8 +73,8 @@ include "functions.php";
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <a href="#" class="btn head-btn1">Register</a>
-                                    <a href="#" class="btn head-btn2">Login</a>
+                                    <a href="registration.php" class="btn head-btn1">Register</a>
+                                    <a href="login.php" class="btn head-btn1">Login</a>
                                 </div>
                             </div>
                         </div>
