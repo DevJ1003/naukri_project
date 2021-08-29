@@ -1,43 +1,29 @@
-<?php include "includes/db.php";
-
-include "includes/functions.php"; ?>
+<?php include "includes/header.php"; ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
+<h1 class="text-center" style="text-align: center;">LOGIN</h1>
 
-<head>
-    <meta charset="utf-8">
-</head>
+<!-- login form starts -->
+<form class="text-center" style="text-align: center;" method="post">
+    <?php login_user(); ?>
 
-<body>
+    <div class="form-group"><label for="username">
+            USERNAME <span class="glyphicon glyphicon-lock"></span><input type="text" name="username" class="form-control"></label>
+    </div>
+    <br>
+    <div class="form-group"><label for="password">
+            PASSWORD <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" class="form-control"></label>
+    </div>
+    <br>
+    <div class="form-group">
+        <button name="submit" type="submit" class="btn btn-primary">Log-In <span class="glyphicon glyphicon-log-in"></span></button>
+    </div>
 
+    <br>
 
-    <h1 class="text-center" style="text-align: center;">LOGIN</h1>
+    <a href="forgot.php">Forgot Password ?</a>
 
-    <!-- login form starts -->
-    <form class="text-center" style="text-align: center;" method="post">
-        <?php login_user(); ?>
-
-        <div class="form-group"><label for="username">
-                USERNAME <span class="glyphicon glyphicon-lock"></span><input type="text" name="username" class="form-control"></label>
-        </div>
-        <br>
-        <div class="form-group"><label for="password">
-                PASSWORD <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" class="form-control"></label>
-        </div>
-        <br>
-        <div class="form-group">
-            <button name="submit" type="submit" class="btn btn-primary">Log-In <span class="glyphicon glyphicon-log-in"></span></button>
-        </div>
-
-        <br>
-
-        <a href="forgot.php">Forgot Password ?</a>
-
-    </form>
+</form>
 
 
-</body>
-
-</html>
+<?php include "includes/footer.php"; ?>

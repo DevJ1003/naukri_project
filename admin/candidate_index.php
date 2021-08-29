@@ -1,10 +1,8 @@
-<?php include "../includes/header.php"; ?>
+<?php include "header.php"; ?>
 
 
-<h1 class="text-center" style="text-align: center;">User ADMIN</h1>
-<ul class="nav navbar-right top-nav">
-    <a class="navbar-brand" href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i>Log Out</a>
-</ul>
+<h1 class="text-center" style="text-align: center;">CANDIDATE ADMIN</h1>
+
 
 
 <table class="table table-hover">
@@ -33,4 +31,4 @@
 
 
 
-<?php include "../includes/footer.php"; ?>
+<?php include "footer.php"; ?>

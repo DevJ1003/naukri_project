@@ -97,12 +97,11 @@ function register_user()
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $user_type = $_POST['type'];
+        $user_type = $_POST['user_type'];
 
-
-        $query = query("INSERT INTO users(username, password, type, email, created_at) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', now() ) ");
+        $generated_query = "INSERT INTO users(username, password, type, email, created_at) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', now() ) ";
+        $query = query($generated_query);
         confirm($query);
-
         redirect("login.php");
     }
 }
@@ -128,7 +127,7 @@ function login_user()
             redirect("login.php");
         } else {
             $_SESSION['username'] = $username;
-            redirect("admin");
+            redirect("admin/candidate_index.php");
         }
     }
 }
@@ -138,6 +137,69 @@ function login_user()
 
 
 /*************************************** END OF REGISTER-LOGIN FUCNTION *************************************/
+
+
+
+
+
+
+
+
+/******************************** HOMEPAGE LOGIN-ADMIN LINK FUCNTION ********************************/
+
+
+
+
+function IsLoggedIn()
+{
+    if (isset($_SESSION['username'])) {
+
+        return true;
+    } else {
+
+        return false;
+    }
+}
+
+
+function show_login_admin_registration_link()
+{
+
+    if (IsLoggedIn()) {
+
+        $admin = <<<DELIMETER
+
+<li>
+    <a href="admin/candidate_index.php"><span class="glyphicon glyphicon-user"></span> Admin</a>
+</li>
+
+DELIMETER;
+
+        echo $admin;
+    } else {
+
+
+        $login = <<<DELIMETER
+
+<li>
+    <a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+</li>
+<li>
+    <a href="registration.php"><span class="glyphicon glyphicon-log-in"></span> Registration</a>
+</li>
+
+DELIMETER;
+
+        echo $login;
+    }
+}
+
+
+
+
+/******************************** END OF HOMEPAGE LOGIN-ADMIN LINK FUCNTION ********************************/
+
+
 
 
 
