@@ -9,7 +9,10 @@
 
 
     <!-- login form starts -->
-    <form role="form" autocomplete="off" class="form" method="post">
+    <form role="form" class="form" method="post">
+        <!--autocomplete="off" in form-->
+
+
         <?php login_user(); ?>
 
         <div class="form-group">

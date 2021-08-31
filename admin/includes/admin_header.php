@@ -1,6 +1,6 @@
-<?php include "db.php";
+<?php include "../includes/db.php";
 
-include "functions.php";
+include "../includes/functions.php";
 
 ?>
 
@@ -11,25 +11,25 @@ include "functions.php";
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home - nAukri !</title>
+    <title>Admin - nAukri !</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href=""><!-- title logo can be changed -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/price_rangs.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../assets/css/flaticon.css">
+    <link rel="stylesheet" href="../assets/css/price_rangs.css">
+    <link rel="stylesheet" href="../assets/css/slicknav.css">
+    <link rel="stylesheet" href="../assets/css/animate.min.css">
+    <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/css/themify-icons.css">
+    <link rel="stylesheet" href="../assets/css/slick.css">
+    <link rel="stylesheet" href="../assets/css/nice-select.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <body>
@@ -39,7 +39,7 @@ include "functions.php";
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="../assets/img/logo/logo.png" alt="">
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@ include "functions.php";
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="../index.php"><img src="../assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -63,17 +63,17 @@ include "functions.php";
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="job_listing.php">Find a Jobs </a></li>
-                                            <?php admin_link_user_type(); ?>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="about.php">About</a></li>
+                                            <li><a href="../index.php">Home</a></li>
+                                            <li><a href="../job_listing.php">Find a Jobs </a></li>
+                                            <li><a href="index.php">Admin</a></li>
+                                            <li><a href="../contact.php">Contact</a></li>
+                                            <li><a href="../about.php">About</a></li>
                                         </ul>
                                     </nav>
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
-                                    <?php show_login_logout_link_homepage(); ?>
+                                    <?php show_login_logout_link(); ?>
                                 </div>
                             </div>
                         </div>

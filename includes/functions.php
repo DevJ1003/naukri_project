@@ -75,6 +75,19 @@ function fetch_array($result)
 
 
 
+function IsLoggedIn()
+{
+    if (isset($_SESSION['username'])) {
+
+        return true;
+    } else {
+
+        return false;
+    }
+}
+
+
+
 
 /***************************************** END Helper Functions ******************************************/
 
@@ -117,20 +130,50 @@ function login_user()
         $username = escape_string($_POST['username']);
         $password = escape_string($_POST['password']);
 
-        $query = query("SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' ");
+        $login_query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' ";
+        $query = query($login_query);
         confirm($query);
 
 
-        if (mysqli_num_rows($query) == 0) {
+        $usertype_query = "SELECT type FROM users WHERE username = '{$username}' ";
+        $query = query($usertype_query);
+        confirm($query);
 
-            set_message("Your Username or Password is wrong !");
-            redirect("login.php");
+
+
+        while ($row = mysqli_fetch_array($query)) {
+
+            $usertype = $row['type'];
+        }
+
+
+
+
+        if ($usertype == 0) {
+
+            if (mysqli_num_rows($query) == 0) {
+
+                set_message("Your Username or Password is wrong !");
+                redirect("login.php");
+            } else {
+                $_SESSION['username'] = $username;
+                redirect("admin/candidate_index.php");
+            }
         } else {
-            $_SESSION['username'] = $username;
-            redirect("admin/candidate_index.php");
+
+            if (mysqli_num_rows($query) == 0) {
+
+                set_message("Your Username or Password is wrong !");
+                redirect("login.php");
+            } else {
+                $_SESSION['username'] = $username;
+                redirect("admin/company_index.php");
+            }
         }
     }
 }
+
+
 
 
 
@@ -145,50 +188,128 @@ function login_user()
 
 
 
-/******************************** HOMEPAGE LOGIN-ADMIN LINK FUCNTION ********************************/
 
 
 
 
-function IsLoggedIn()
+
+
+/****************************** ADMIN REGISTRATION , LOGIN , LOGOUT BUTTON ********************************/
+
+
+
+
+
+
+
+
+function admin_link_user_type()
 {
-    if (isset($_SESSION['username'])) {
 
-        return true;
-    } else {
 
-        return false;
+    if (IsLoggedIn()) {
+
+        $admin_username_query = query("SELECT id FROM users");
+        confirm($admin_username_query);
+
+        while ($row = mysqli_fetch_array($admin_username_query)) {
+
+            $id = $row['id'];
+
+
+
+
+
+
+            $admin_usertype_query = query("SELECT type FROM users WHERE id = '{$id}' ");
+            confirm($admin_usertype_query);
+
+
+
+
+
+
+            while ($row = mysqli_fetch_array($admin_usertype_query)) {
+
+                $usertype = $row['type'];
+            }
+
+
+            var_dump($usertype);
+
+
+
+            if ($usertype == 0) {
+
+                $candidate_admin = <<<DELIMETER
+
+            <li><a href="admin/candidate_index.php">Admin</a></li>
+
+            DELIMETER;
+
+                echo $candidate_admin;
+            } else {
+
+
+
+                $company_admin = <<<DELIMETER
+
+            <li><a href="admin/company_index.php">Admin</a></li>
+
+            DELIMETER;
+
+                echo $company_admin;
+            }
+        }
     }
 }
 
 
-function show_login_admin_registration_link()
+
+
+
+
+
+
+
+
+function show_admin_link()
 {
+
 
     if (IsLoggedIn()) {
 
         $admin = <<<DELIMETER
 
-<li>
-    <a href="admin/candidate_index.php"><span class="glyphicon glyphicon-user"></span> Admin</a>
-</li>
+        <li><a href="">Admin</a></li>
 
-DELIMETER;
+        DELIMETER;
 
         echo $admin;
-    } else {
+    }
+}
 
+
+
+
+
+
+
+
+function show_login_logout_link_homepage()
+{
+
+
+    if (IsLoggedIn()) {
+    } else {
 
         $login = <<<DELIMETER
 
-<li>
-    <a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-</li>
-<li>
-    <a href="registration.php"><span class="glyphicon glyphicon-log-in"></span> Registration</a>
-</li>
+    <a href="registration.php" class="btn head-btn1">Register</a>
+    <a href="login.php" class="btn head-btn1">Login</a>
 
-DELIMETER;
+
+    DELIMETER;
 
         echo $login;
     }
@@ -197,7 +318,51 @@ DELIMETER;
 
 
 
-/******************************** END OF HOMEPAGE LOGIN-ADMIN LINK FUCNTION ********************************/
+
+
+
+
+
+function show_login_logout_link()
+{
+
+
+    if (IsLoggedIn()) {
+
+        $logout = <<<DELIMETER
+
+    <a href="../includes/logout.php" class="btn head-btn1">Log Out</a>
+
+
+    DELIMETER;
+
+        echo $logout;
+    } else {
+
+        $login = <<<DELIMETER
+
+    <a href="../registration.php" class="btn head-btn1">Register</a>
+    <a href="../login.php" class="btn head-btn1">Login</a>
+
+
+    DELIMETER;
+
+        echo $login;
+    }
+}
+
+
+
+
+
+
+
+
+/*********************************** END ADMIN REGISTRATION , LOGIN , LOGOUT BUTTON **********************************/
+
+
+
+
 
 
 
