@@ -65,7 +65,7 @@ include "functions.php";
                                         <ul id="navigation">
                                             <li><a href="index.php">Home</a></li>
                                             <li><a href="job_listing.php">Find a Jobs </a></li>
-                                            <?php admin_link_user_type(); ?>
+                                            <?php admin_link_user_type_index(); ?>
                                             <li><a href="contact.php">Contact</a></li>
                                             <li><a href="about.php">About</a></li>
                                         </ul>

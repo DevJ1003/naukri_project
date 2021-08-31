@@ -89,7 +89,22 @@ function IsLoggedIn()
 
 
 
+
+function get_user_name()
+{
+    if (isset($_SESSION['username'])) {
+
+        return $_SESSION['username'];
+    }
+}
+
+
+
+
 /***************************************** END Helper Functions ******************************************/
+
+
+
 
 
 
@@ -203,64 +218,78 @@ function login_user()
 
 
 
-function admin_link_user_type()
+function admin_link_user_type_index()
 {
 
 
     if (IsLoggedIn()) {
 
-        $admin_username_query = query("SELECT id FROM users");
-        confirm($admin_username_query);
 
-        while ($row = mysqli_fetch_array($admin_username_query)) {
-
-            $id = $row['id'];
+        $username = $_SESSION['username'];
 
 
+        $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
+        confirm($admin_usertype_query);
 
+        while ($row = mysqli_fetch_array($admin_usertype_query)) {
 
-
-
-            $admin_usertype_query = query("SELECT type FROM users WHERE id = '{$id}' ");
-            confirm($admin_usertype_query);
-
-
-
-
-
-
-            while ($row = mysqli_fetch_array($admin_usertype_query)) {
-
-                $usertype = $row['type'];
-            }
-
-
-            var_dump($usertype);
-
-
-
-            if ($usertype == 0) {
-
-                $candidate_admin = <<<DELIMETER
-
-            <li><a href="admin/candidate_index.php">Admin</a></li>
-
-            DELIMETER;
-
-                echo $candidate_admin;
-            } else {
-
-
-
-                $company_admin = <<<DELIMETER
-
-            <li><a href="admin/company_index.php">Admin</a></li>
-
-            DELIMETER;
-
-                echo $company_admin;
-            }
+            $usertype = $row['type'];
         }
+
+
+        if ($usertype == 0) {
+
+            $candidate_admin = <<<DELIMETER
+            <li><a href="admin/candidate_index.php">Admin</a></li>
+            DELIMETER;
+
+            echo $candidate_admin;
+        } else {
+
+            $company_admin = <<<DELIMETER
+            <li><a href="admin/company_index.php">Admin</a></li>
+            DELIMETER;
+
+            echo $company_admin;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+function admin_link_user_type_admin()
+{
+
+    $username = $_SESSION['username'];
+
+    $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
+    confirm($admin_usertype_query);
+
+    while ($row = mysqli_fetch_array($admin_usertype_query)) {
+
+        $usertype = $row['type'];
+    }
+
+
+    if ($usertype == 0) {
+
+        $candidate_admin = <<<DELIMETER
+            <li><a href="candidate_index.php">Admin</a></li>
+            DELIMETER;
+
+        echo $candidate_admin;
+    } else {
+
+        $company_admin = <<<DELIMETER
+            <li><a href="company_index.php">Admin</a></li>
+            DELIMETER;
+
+        echo $company_admin;
     }
 }
 
@@ -367,49 +396,181 @@ function show_login_logout_link()
 
 
 
-
-
-
-
-
-/**************************************** ADMIN DATA FUCNTIONS ***********************************************/
-
-
-
-
-
-function get_jobs_in_user_admin()
+function send_message()
 {
 
+
+
+    if (isset($_POST['submit'])) {
+
+
+
+        $to = "devtestphpmail.com";
+        $subject = wordwrap($_POST['subject'], 70);
+        $body = $_POST['message'];
+        $from = $_POST['email'];
+        $header = "From" . $from;
+
+
+        $message = mail($to, $from, "$subject", $body, $header);
+
+        if (!$message) {
+
+            set_message("Sorry , we Could not send your message !");
+            redirect("contact.php");
+        } else {
+
+            set_message("Message sent sucessfully !");
+            redirect("contact.php");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************** FRONT DATA FUCNTIONS ***********************************************/
+
+
+
+
+
+
+function count_jobs()
+{
+
+
+    $query = query("SELECT id FROM jobs");
+    confirm($query);
+
+    $jobs_count = mysqli_num_rows($query);
+
+    echo $jobs_count;
+}
+
+
+
+
+
+
+
+
+function get_jobs()
+{
 
     $query = query("SELECT * FROM jobs");
     confirm($query);
 
-
     while ($row = fetch_array($query)) {
 
-
         $user_admin_job = <<<DELIMETER
-
-
-
-
 
 <tr>
 <td>{$row['id']}</td>
 <td>{$row['title']}</td>
 <td>{$row['company_name']}</td>
 <td>{$row['description']}</td>
-<td>{$row['salary']}</td>
+<td>&#8377;{$row['salary']}</td>
 <td>{$row['location']}</td>
+<td>{$row['created_at']}</td>
 </tr>
-
-
-
-
 
 DELIMETER;
 
         echo $user_admin_job;
     }
 }
+
+
+
+
+
+
+
+/************************************* END FRONT DATA FUCNTIONS *****************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/******************************************** ADMIN DATA FUCNTIONS *****************************/
+
+
+
+
+
+
+
+
+function get_jobs_company_admin()
+{
+
+    $query = query("SELECT * FROM jobs");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $user_admin_job = <<<DELIMETER
+
+<tr>
+<td>{$row['id']}</td>
+<td>{$row['title']}</td>
+<td>{$row['company_name']}</td>
+<td>{$row['description']}</td>
+<td>&#8377;{$row['salary']}</td>
+<td>{$row['location']}</td>
+<td>{$row['created_at']}</td>
+<td><a href="add_jobs.php">Add</a></td>
+<td><a href="edit_jobs.php">Edit</a></td>
+<td><a href="delete_jobs.php">Delete</a></td>
+</tr>
+
+DELIMETER;
+
+        echo $user_admin_job;
+    }
+}
+
+
+
+
+
+
+
+/**************************************** END ADMIN DATA FUCNTIONS *****************************/
