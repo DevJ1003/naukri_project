@@ -101,6 +101,17 @@ function get_user_name()
 
 
 
+function get_user_id()
+{
+    if (isset($_SESSION['user_id'])) {
+
+        return $_SESSION['user_id'];
+    }
+}
+
+
+
+
 /***************************************** END Helper Functions ******************************************/
 
 
@@ -556,7 +567,6 @@ function get_jobs_company_admin()
 <td>&#8377;{$row['salary']}</td>
 <td>{$row['location']}</td>
 <td>{$row['created_at']}</td>
-<td><a href="add_jobs.php">Add</a></td>
 <td><a href="edit_jobs.php">Edit</a></td>
 <td><a href="delete_jobs.php">Delete</a></td>
 </tr>
@@ -566,6 +576,50 @@ DELIMETER;
         echo $user_admin_job;
     }
 }
+
+
+
+
+
+
+
+
+
+
+function add_jobs()
+{
+
+
+    if (isset($_POST['submit'])) {
+
+
+        $company_id = $_SESSION['user_id'];
+        $company_name = $_SESSION['username'];
+        $title = $_POST['job_title'];
+        $user_id = "";
+        $username = "";
+        $description = $_POST['job_description'];
+        $salary = $_POST['job_salary'];
+        $location = $_POST['job_location'];
+
+
+
+        $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , salary , location , created_at ) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$salary}' , '{$location}' , now() ) ");
+        confirm($query);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
