@@ -552,7 +552,9 @@ DELIMETER;
 function get_jobs_company_admin()
 {
 
-    $query = query("SELECT * FROM jobs");
+    $username = $_SESSION['username'];
+
+    $query = query("SELECT * FROM jobs WHERE company_name = '{$username}' ");
     confirm($query);
 
     while ($row = fetch_array($query)) {
@@ -567,8 +569,22 @@ function get_jobs_company_admin()
 <td>&#8377;{$row['salary']}</td>
 <td>{$row['location']}</td>
 <td>{$row['created_at']}</td>
-<td><a href="edit_jobs.php">Edit</a></td>
-<td><a href="delete_jobs.php">Delete</a></td>
+<td>
+    <div class="header-btn d-none f-right d-lg-block">
+        <a href="job_details.php?&id={$row['id']}" class="btn border-btn head-btn1">View</a>
+    </div>
+</td>
+<td>
+    <div class="header-btn d-none f-right d-lg-block">
+        <a href="edit_jobs.php?&id={$row['id']}" class="btn border-btn head-btn1">Update</a>
+    </div>
+</td>
+<td>
+    <div class="header-btn d-none f-right d-lg-block job_delete">
+        <a href="delete_jobs.php?&id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
+    </div>
+</td>
+
 </tr>
 
 DELIMETER;
@@ -603,9 +619,27 @@ function add_jobs()
         $location = $_POST['job_location'];
 
 
+        if (empty($title) || $title == " ") {
 
-        $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , salary , location , created_at ) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$salary}' , '{$location}' , now() ) ");
-        confirm($query);
+            set_message("Title cannot be empty !");
+        } elseif (empty($description) || $description == " ") {
+
+            set_message("Description cannot be empty !");
+        } elseif (empty($salary) || $salary == " ") {
+
+            set_message("Salary cannot be empty !");
+        } elseif (empty($location) || $location == " ") {
+
+            set_message("Location cannot be empty !");
+        } else {
+
+
+            $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , salary , location , created_at ) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$salary}' , '{$location}' , now() ) ");
+            confirm($query);
+
+            set_message("New job created !");
+            // redirect("company_index.php");
+        }
     }
 }
 
@@ -616,7 +650,27 @@ function add_jobs()
 
 
 
+function update_jobs()
+{
 
+
+    if (isset($_POST['update'])) {
+
+        $title = $_POST['job_title'];
+        $description = $_POST['job_description'];
+        $salary = $_POST['job_salary'];
+        $location = $_POST['job_location'];
+
+
+        $query  = "UPDATE jobs SET title = '{$title}' , description = '{$description}' , salary = '{$salary}' , location = '{$location}' , updated_at = now() ";
+        $query .= "WHERE id =" . escape_string($_GET['id']);
+        $update_job_query = query($query);
+        confirm($update_job_query);
+
+        set_message("Job has been Updated !");
+        redirect("company_index.php");
+    }
+}
 
 
 

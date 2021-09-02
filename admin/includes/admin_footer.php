@@ -1,4 +1,5 @@
 <!-- JS here -->
+
 <!-- All JS Custom Plugins Link Here here -->
 <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
 <!-- Jquery, Popper, Bootstrap -->
@@ -33,6 +34,9 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="../assets/js/plugins.js"></script>
 <script src="../assets/js/main.js"></script>
+
+<!-- CUSTOM JS CODE HERE -->
+<script src="../assets/js/script.js"></script>
 
 </body>
 

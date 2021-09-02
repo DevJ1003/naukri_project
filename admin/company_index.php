@@ -15,10 +15,16 @@
         </div>
     </div>
 </div>
+<br>
 <!-- Hero Area End -->
 
 <div class="container">
-    <table class="table">
+    <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
+        All Jobs...!!
+    </h1>
+    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
+
+    <table class="table" style="min-height: 300px;">
 
         <thead>
             <tr>
@@ -26,7 +32,7 @@
                 <th>Name</th>
                 <th>Company</th>
                 <th>Description</th>
-                <th>Salary</th>
+                <th>(&#8377;)Salary</th>
                 <th>Location</th>
                 <th>Posted At</th>
                 <th>Actions</th>
@@ -38,10 +44,13 @@
     </table>
 </div>
 
-<div class="col-lg-12 text-center">
-    <p><a href="add_jobs.php">Add New Job<span class="glyphicon glyphicon-ok"></span></a></p>
+<!-- Add Button -->
+<div class="text-center">
+    <div class="header-btn d-none f-center d-lg-block">
+        <p><a href="add_jobs.php" class="btn border-btn head-btn1">Add New Job</a></p>
+    </div>
 </div>
-
+<!-- Add Button Ends -->
 <br>
 
 <?php include "includes/admin_footer.php"; ?>

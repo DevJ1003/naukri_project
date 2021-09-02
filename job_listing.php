@@ -42,7 +42,7 @@
                             <!-- Count of Job list Start -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    Total <?php count_jobs(); ?> Jobs !
+                                    Total <?php count_jobs(); ?> Jobs found!
                                 </div>
                             </div>
                             <!-- Count of Job list End -->

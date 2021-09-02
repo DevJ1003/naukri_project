@@ -26,7 +26,8 @@
     <h1 class="page-header"><i class="fa fa-fw fa-table"></i>
         Add New Job...!!
     </h1>
-
+    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
+    <hr>
 
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -66,8 +67,6 @@
 
 </div>
 <!-- /#page-wrapper -->
-
-
-
+<br>
 
 <?php include "includes/admin_footer.php"; ?>
