@@ -138,10 +138,17 @@ function register_user()
         $password = $_POST['password'];
         $user_type = $_POST['user_type'];
 
-        $generated_query = "INSERT INTO users(username, password, type, email, created_at) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', now() ) ";
+        $image = $_FILES['file']['name'];
+        $image_temp = $_FILES['file']['tmp_name'];
+
+        move_uploaded_file($image_temp, "images/$image");
+
+        $generated_query = "INSERT INTO users(username, password , type , email , image , created_at) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', '{$image}' , now() ) ";
         $query = query($generated_query);
         confirm($query);
+
         redirect("login.php");
+        set_message("User Registered !!");
     }
 }
 
@@ -259,7 +266,8 @@ function admin_link_user_type_index()
 
             $company_admin = <<<DELIMETER
             <li><a href="admin/company_index.php">Admin</a></li>
-            DELIMETER;
+            <li><a href="profile.php">Profile</a></li>
+DELIMETER;
 
             echo $company_admin;
         }
@@ -298,6 +306,7 @@ function admin_link_user_type_admin()
 
         $company_admin = <<<DELIMETER
             <li><a href="company_index.php">Admin</a></li>
+            <li><a href="../profile.php">Profile</a></li>
             DELIMETER;
 
         echo $company_admin;
@@ -512,6 +521,11 @@ function get_jobs()
 <td>&#8377;{$row['salary']}</td>
 <td>{$row['location']}</td>
 <td>{$row['created_at']}</td>
+<td>
+    <div class="header-btn d-none f-right d-lg-block">
+        <a href="job_details.php?&id={$row['id']}" class="btn border-btn head-btn1">View</a>
+    </div>
+</td>
 </tr>
 
 DELIMETER;
@@ -549,6 +563,51 @@ DELIMETER;
 
 
 
+
+function update_profile()
+{
+
+
+    if (isset($_POST['update'])) {
+
+        $image        = $_FILES['file']['name'];
+        $temp_image   = $_FILES['file']['tmp_name'];
+
+        $description = $_POST['company_description'];
+        $capacity    = $_POST['company_employees'];
+        $location    = $_POST['company_location'];
+
+        move_uploaded_file($temp_image, "images/$image");
+
+
+        if (empty($image)) {
+
+            $username = $_SESSION['username'];
+            $query = query("SELECT * FROM users WHERE username = '{$username}' ");
+
+            while ($row = mysqli_fetch_array($query)) {
+
+                $image = $row['image'];
+            }
+        }
+
+        $query = "UPDATE users SET description = '{$description}' , capacity = '{$capacity}' , image = '{$image}' , location = '{$location}' , updated_at = now() ";
+        $query .= "WHERE username = '{$_SESSION['username']}' ";
+        $update_profile_query = query($query);
+        confirm($update_profile_query);
+
+        set_message("Youe profile has been updated !");
+        redirect("admin/company_index.php");
+    }
+}
+
+
+
+
+
+
+
+
 function get_jobs_company_admin()
 {
 
@@ -571,7 +630,7 @@ function get_jobs_company_admin()
 <td>{$row['created_at']}</td>
 <td>
     <div class="header-btn d-none f-right d-lg-block">
-        <a href="job_details.php?&id={$row['id']}" class="btn border-btn head-btn1">View</a>
+        <a href="../job_details.php?&id={$row['id']}" class="btn border-btn head-btn1">View</a>
     </div>
 </td>
 <td>
@@ -615,31 +674,21 @@ function add_jobs()
         $user_id = "";
         $username = "";
         $description = $_POST['job_description'];
+        $vacancy = $_POST['job_vacancy'];
+        $nature = $_POST['job_nature'];
+        $knowledge = $_POST['job_knowledge'];
+        $skills = $_POST['job_skills'];
+        $education = $_POST['job_education'];
+        $experience = $_POST['job_experience'];
         $salary = $_POST['job_salary'];
         $location = $_POST['job_location'];
 
 
-        if (empty($title) || $title == " ") {
+        $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , vacancy , nature , knowledge , skills , education , experience , salary , location , created_at ) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$vacancy}' , '{$nature}' , '{$knowledge}' , '{$skills}' , '{$education}' , '{$experience}' , '{$salary}' , '{$location}' , now() ) ");
+        confirm($query);
 
-            set_message("Title cannot be empty !");
-        } elseif (empty($description) || $description == " ") {
-
-            set_message("Description cannot be empty !");
-        } elseif (empty($salary) || $salary == " ") {
-
-            set_message("Salary cannot be empty !");
-        } elseif (empty($location) || $location == " ") {
-
-            set_message("Location cannot be empty !");
-        } else {
-
-
-            $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , salary , location , created_at ) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$salary}' , '{$location}' , now() ) ");
-            confirm($query);
-
-            set_message("New job created !");
-            // redirect("company_index.php");
-        }
+        set_message("New job created !");
+        // redirect("company_index.php");
     }
 }
 
@@ -672,6 +721,41 @@ function update_jobs()
     }
 }
 
+
+
+
+
+
+
+
+
+
+function jobs_data_admin()
+{
+
+
+    if (isset($_GET['id'])) {
+
+        $query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
+        confirm($query);
+
+        while ($row = fetch_array($query)) {
+
+            $company_name = $_SESSION['username'];
+            $title       = escape_string($row['title']);
+            $description = escape_string($row['description']);
+            $vacancy     = escape_string($row['vacancy']);
+            $nature      = escape_string($row['nature']);
+            $knowledge   = escape_string($row['knowledge']);
+            $skills      = escape_string($row['skills']);
+            $education   = escape_string($row['education']);
+            $experience  = escape_string($row['experience']);
+            $salary      = escape_string($row['salary']);
+            $location    = escape_string($row['location']);
+            $posted_on   = escape_string($row['created_at']);
+        }
+    }
+}
 
 
 

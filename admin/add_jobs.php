@@ -33,33 +33,64 @@
     <form action="" method="post" enctype="multipart/form-data">
         <?php add_jobs();
         ?>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="form-group">
                 <label for="job-title">TITLE</label>
-                <input type="text" name="job_title" class="form-control">
+                <input type="text" name="job_title" class="form-control" required data-validation-required-message="Please Enter">
             </div>
 
             <div class="form-group">
                 <label for="job-description">DESCRIPTION</label>
-                <textarea type="text" name="job_description" id="" cols="30" rows="10" class="form-control"></textarea>
+                <textarea type="text" name="job_description" id="" cols="30" rows="10" class="form-control" required data-validation-required-message="Please Enter"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="job-vacancy">VACANCY</label>
+                <input type="text" name="job_vacancy" class="form-control" required data-validation-required-message="Please Enter">
+            </div>
+
+            <div class="form-group">
+                <label for="job-nature">NATURE</label>
+                <input type="text" name="job_nature" class="form-control" required data-validation-required-message="Please Enter">
+            </div>
+
+            <div class="form-group">
+                <label for="job-knowledge">KNOWLEDGE</label>
+                <input type="text" name="job_knowledge" class="form-control" required data-validation-required-message="Please Enter">
+            </div>
+
+
+            <div class="form-group">
+                <label for="job-skills">SKILLS</label>
+                <input type="text" name="job_skills" class="form-control" required data-validation-required-message="Please Enter">
+            </div>
+
+            <div class="form-group">
+                <label for="job-education">EDUCATION</label>
+                <input type="text" name="job_education" class="form-control" required data-validation-required-message="Please Enter">
+            </div>
+
+            <div class="form-group">
+                <label for="job-experience">EXPERIENCE</label>
+                <input type="text" name="job_experience" class="form-control" required data-validation-required-message="Please Enter">
             </div>
 
             <div class="form-group">
                 <label for="job-salary">SALARY ( &#8377; )</label>
-                <input type="text" name="job_salary" class="form-control">
+                <input type="text" name="job_salary" class="form-control" required data-validation-required-message="Please Enter">
             </div>
 
             <div class="form-group">
                 <label for="job-location">LOCATION</label>
-                <input type="text" name="job_location" class="form-control"></input>
+                <input type="text" name="job_location" class="form-control" required data-validation-required-message="Please Enter"></input>
             </div>
 
             <div class="form-group">
                 <button name="submit" type="submit" class="btn head-btn2">Add New Job <span class="glyphicon glyphicon-ok"></span></button>
             </div>
 
-
         </div>
+
         <!--Main Content-->
 
 

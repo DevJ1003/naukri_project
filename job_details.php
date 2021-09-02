@@ -1,27 +1,50 @@
-<?php include "includes/admin_header.php";
+<?php include "includes/header.php";
 
 if (isset($_GET['id'])) {
 
-    $query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
-    confirm($query);
+    $jobs_data_query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
+    confirm($jobs_data_query);
 
-    while ($row = fetch_array($query)) {
+    while ($row = fetch_array($jobs_data_query)) {
 
-        $company_name = $_SESSION['username'];
-        $title       = escape_string($row['title']);
-        $description = escape_string($row['description']);
-        $salary      = escape_string($row['salary']);
-        $location    = escape_string($row['location']);
-        $posted_on   = escape_string($row['created_at']);
+        $company_name = escape_string($row['username']);
+        $title        = escape_string($row['title']);
+        $description  = escape_string($row['description']);
+        $vacancy      = escape_string($row['vacancy']);
+        $nature       = escape_string($row['nature']);
+        $knowledge    = escape_string($row['knowledge']);
+        $skills       = escape_string($row['skills']);
+        $education    = escape_string($row['education']);
+        $experience   = escape_string($row['experience']);
+        $salary       = escape_string($row['salary']);
+        $location     = escape_string($row['location']);
+        $posted_on    = escape_string($row['created_at']);
     }
+
+
+
+    // $company_data_query = query("SELECT * FROM users");
+    // confirm($company_data_query);
+
+    // while ($row = fetch_array($company_data_query)) {
+
+
+    //     $company_description = $row['description'];
+    //     $company_image = $row['image'];
+    //     $company_email = $row['email'];
+    // }
 }
+
+
+
+
 
 ?>
 
 
 <!-- Hero Area Start-->
 <div class="slider-area ">
-    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -47,12 +70,10 @@ if (isset($_GET['id'])) {
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="#"><img src="../assets/img/icon/job-list1.png" alt=""></a>
+                            <a href="#"><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
                         </div>
                         <div class="job-tittle">
-                            <a href="#">
-                                <h4><?php echo $title; ?></h4>
-                            </a>
+                            <h4><?php echo $title; ?></h4>
                             <ul>
                                 <li><?php echo $company_name; ?></li>
                                 <li><i class="fas fa-map-marker-alt"></i><?php echo $location; ?></li>
@@ -74,14 +95,11 @@ if (isset($_GET['id'])) {
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Required Knowledge, Skills, and Abilities</h4>
+                            <h4>Required Knowledge, Skills and Abilities</h4>
                         </div>
                         <ul>
-                            <li>System Software Development</li>
-                            <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
-                            <li>Research and code , libraries, APIs and frameworks</li>
-                            <li>Strong knowledge on software development life cycle</li>
-                            <li>Strong problem solving and debugging skills</li>
+                            <li><?php echo $knowledge; ?></li>
+                            <li><?php echo $skills; ?></li>
                         </ul>
                     </div>
                     <div class="post-details2  mb-50">
@@ -90,11 +108,8 @@ if (isset($_GET['id'])) {
                             <h4>Education + Experience</h4>
                         </div>
                         <ul>
-                            <li>3 or more years of professional design experience</li>
-                            <li>Direct response email experience</li>
-                            <li>Ecommerce website design experience</li>
-                            <li>Familiarity with mobile and web apps preferred</li>
-                            <li>Experience using Invision a plus</li>
+                            <li><?php echo $education; ?></li>
+                            <li><?php echo $experience; ?></li>
                         </ul>
                     </div>
                 </div>
@@ -110,8 +125,8 @@ if (isset($_GET['id'])) {
                     <ul>
                         <li>Posted date : <span><?php echo $posted_on; ?></span></li>
                         <li>Location : <span><?php echo $location; ?></span></li>
-                        <li>Vacancy : <span>02</span></li>
-                        <li>Job nature : <span>Full time</span></li>
+                        <li>Vacancy : <span><?php echo $vacancy; ?></span></li>
+                        <li>Job nature : <span><?php echo $nature; ?></span></li>
                         <li>Salary : <span>&#8377; <?php echo $salary; ?> yearly</span></li>
                     </ul>
                     <div class="apply-btn2">
@@ -121,14 +136,14 @@ if (isset($_GET['id'])) {
                 <div class="post-details4  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Company Information</h4>
+                        <h4>Company Information :</h4>
                     </div>
-                    <span>Colorlib</span>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    <span><?php echo $company_name; ?></span>
+                    <p><?php echo $company_description; ?></p>
                     <ul>
-                        <li>Name: <span>Colorlib </span></li>
+                        <li>Name: <span><?php echo $company_name; ?></span></li>
                         <li>Web : <span> colorlib.com</span></li>
-                        <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                        <li>Email: <span><?php echo $company_email; ?></span></li>
                     </ul>
                 </div>
             </div>
@@ -139,4 +154,4 @@ if (isset($_GET['id'])) {
 
 </main>
 
-<?php include "includes/admin_footer.php"; ?>
+<?php include "includes/footer.php"; ?>

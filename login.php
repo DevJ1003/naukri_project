@@ -2,7 +2,7 @@
 
 <!-- Page Content -->
 <div class="text-center">
-
+    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
     <h3><i class="fa fa-user fa-4x"></i></h3>
     <h1>LOGIN</h1>

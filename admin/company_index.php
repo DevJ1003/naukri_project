@@ -24,7 +24,7 @@
     </h1>
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
-    <table class="table" style="min-height: 300px;">
+    <table class="table" style="min-height: 400px;">
 
         <thead>
             <tr>

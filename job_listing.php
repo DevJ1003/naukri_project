@@ -47,8 +47,6 @@
                             </div>
                             <!-- Count of Job list End -->
 
-
-
                             <table class="table table-hover">
 
                                 <thead>
@@ -60,23 +58,13 @@
                                         <th>Salary</th>
                                         <th>Location</th>
                                         <th>Posted At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php get_jobs(); ?>
                                 </tbody>
-
-
-
                             </table>
-
-
-
-
-
-
-
-
                         </div>
                     </section>
                     <!-- Featured_job_end -->
