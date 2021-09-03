@@ -21,23 +21,23 @@ Admin View :
 8. Update candidate account details
 
 Client/Company view
-1. Post jobs - job create, edit, delete, view
-2. View its posted jobs - list view of all the jobs posted
+1. Post jobs - job create, edit, delete, view       ==========================yes
+2. View its posted jobs - list view of all the jobs posted  ==================yes
 3. Applications received
 4. reject/accept applications
 5. message candidate
 
 
 Candidate view
-1. view all jobs
+1. view all jobs  ================================yes
 2. View its applied jobs
 3. Applications sent
 4. retrieve application
 
 User Account management
 
-1. Resgiter
-2. Login
+1. Resgiter ===============================yes
+2. Login  ==================================yes
 3. Forgot password
 
 ====================================

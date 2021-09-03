@@ -62,7 +62,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <?php get_jobs(); ?>
+
                                 </tbody>
                             </table>
                         </div>

@@ -64,8 +64,15 @@ include "../includes/functions.php";
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
                                             <li><a href="../index.php">Home</a></li>
-                                            <li><a href="../job_listing.php">Find a Jobs </a></li>
-                                            <?php admin_link_user_type_admin(); ?>
+                                            <?php
+
+                                            find_job_button_link();
+
+                                            // find_job_button_link_company();
+
+                                            admin_link_user_type_admin();
+
+                                            ?>
                                             <li><a href="../contact.php">Contact</a></li>
                                             <li><a href="../about.php">About</a></li>
                                         </ul>

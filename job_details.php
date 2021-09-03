@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
     while ($row = fetch_array($jobs_data_query)) {
 
-        $company_name = escape_string($row['username']);
+        /* JOB DATA */
         $title        = escape_string($row['title']);
         $description  = escape_string($row['description']);
         $vacancy      = escape_string($row['vacancy']);
@@ -19,27 +19,29 @@ if (isset($_GET['id'])) {
         $salary       = escape_string($row['salary']);
         $location     = escape_string($row['location']);
         $posted_on    = escape_string($row['created_at']);
+
+
+
+        /* COMPANY DATA */
+        $company_name = escape_string($row['company_name']);
+        $company_data_query = query("SELECT * FROM users WHERE username = '{$company_name}' ");
+        confirm($company_data_query);
+
+        while ($row = fetch_array($company_data_query)) {
+
+
+            $company_description = $row['description'];
+            $company_image = $row['image'];
+            $company_email = $row['email'];
+        }
     }
-
-
-
-    // $company_data_query = query("SELECT * FROM users");
-    // confirm($company_data_query);
-
-    // while ($row = fetch_array($company_data_query)) {
-
-
-    //     $company_description = $row['description'];
-    //     $company_image = $row['image'];
-    //     $company_email = $row['email'];
-    // }
 }
 
 
-
-
-
 ?>
+
+
+
 
 
 <!-- Hero Area Start-->
@@ -59,6 +61,7 @@ if (isset($_GET['id'])) {
 <br>
 <!-- Hero Area End -->
 
+<?php display_message(); ?>
 
 <!-- job post company Start -->
 <div class="job-post-company pt-120 pb-120">
@@ -70,7 +73,7 @@ if (isset($_GET['id'])) {
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="#"><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
+                            <a href="company.php?id="><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
                         </div>
                         <div class="job-tittle">
                             <h4><?php echo $title; ?></h4>
@@ -129,11 +132,11 @@ if (isset($_GET['id'])) {
                         <li>Job nature : <span><?php echo $nature; ?></span></li>
                         <li>Salary : <span>&#8377; <?php echo $salary; ?> yearly</span></li>
                     </ul>
-                    <div class="apply-btn2">
-                        <a href="#" class="btn">Apply Now</a>
-                    </div>
+
+                    <?php apply_button_in_job_details(); ?>
+
                 </div>
-                <div class="post-details4  mb-50">
+                <div class="post-details3  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
                         <h4>Company Information :</h4>
