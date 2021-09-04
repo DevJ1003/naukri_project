@@ -1,14 +1,14 @@
-<?php include "includes/admin_header.php"; ?>
+<?php include "includes/header.php"; ?>
 
 
 <!-- Hero Area Start-->
 <div class="slider-area ">
-    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Welcome to <?php echo $_SESSION['username'] ?>'s Admin page !</h2>
+                        <h2>Job Applications Received !</h2>
                     </div>
                 </div>
             </div>
@@ -20,29 +20,31 @@
 
 <div class="container">
     <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
-        Your Selected Jobs...!!
+        All Jobs...!!
     </h1>
-    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
+    <h4 class="text-center bg-info"><?php //display_message(); 
+                                    ?></h4>
 
-    <table class="table" style="min-height: 400px;">
+    <table class="table">
+        <!-- <table class="table" style="min-height: 400px;"> -->
 
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Company</th>
                 <th>Description</th>
                 <th>(&#8377;)Salary</th>
                 <th>Location</th>
-                <th>Posted At</th>
+                <th>Applied At</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <?php get_jobs_candidate_admin(); ?>
+            <?php //get_jobs_company_admin(); 
+            ?>
         </tbody>
     </table>
 </div>
 <br>
 
-<?php include "includes/admin_footer.php"; ?>
+<?php include "includes/footer_short.php"; ?>

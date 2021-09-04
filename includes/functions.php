@@ -200,6 +200,7 @@ function login_user()
                 set_message("Your Username or Password is wrong !");
                 redirect("login.php");
             } else {
+                $_SESSION['user_id'] = $userid;
                 $_SESSION['username'] = $username;
                 redirect("admin/company_index.php");
             }
@@ -236,16 +237,14 @@ function login_user()
 
 
 
-
-function admin_link_user_type_index()
+function admin_link_user_type_home()
 {
-
 
     if (IsLoggedIn()) {
 
 
-        $username = $_SESSION['username'];
 
+        $username = $_SESSION['username'];
 
         $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
         confirm($admin_usertype_query);
@@ -259,22 +258,32 @@ function admin_link_user_type_index()
         if ($usertype == 0) {
 
             $candidate_admin = <<<DELIMETER
+            <li><a href="job_listing.php">Find a Job</a></li>
             <li><a href="admin/candidate_index.php">Admin</a></li>
-            DELIMETER;
+        DELIMETER;
 
             echo $candidate_admin;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_admin = <<<DELIMETER
             <li><a href="admin/company_index.php">Admin</a></li>
+            <li><a href="company_applications.php">Applications</a></li>
             <li><a href="profile.php">Profile</a></li>
-DELIMETER;
+        DELIMETER;
 
             echo $company_admin;
         }
+    } else {
+
+        $find_job_button = <<<DELIMETER
+
+        <li><a href="job_listing.php">Find a Job</a></li>
+
+DELIMETER;
+
+        echo $find_job_button;
     }
 }
-
 
 
 
@@ -285,101 +294,50 @@ DELIMETER;
 function admin_link_user_type_admin()
 {
 
-    $username = $_SESSION['username'];
-
-    $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
-    confirm($admin_usertype_query);
-
-    while ($row = mysqli_fetch_array($admin_usertype_query)) {
-
-        $usertype = $row['type'];
-    }
-
-
-    if ($usertype == 0) {
-
-        $candidate_admin = <<<DELIMETER
-            <li><a href="candidate_index.php">Admin</a></li>
-            DELIMETER;
-
-        echo $candidate_admin;
-    } else {
-
-        $company_admin = <<<DELIMETER
-            <li><a href="company_index.php">Admin</a></li>
-            <li><a href="../profile.php">Profile</a></li>
-            DELIMETER;
-
-        echo $company_admin;
-    }
-}
+    if (IsLoggedIn()) {
 
 
 
+        $username = $_SESSION['username'];
+
+        $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
+        confirm($admin_usertype_query);
+
+        while ($row = mysqli_fetch_array($admin_usertype_query)) {
+
+            $usertype = $row['type'];
+        }
 
 
+        if ($usertype == 0) {
 
-
-
-
-
-function find_job_button_link()
-{
-
-
-    $username = $_SESSION['username'];
-
-    $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
-    confirm($admin_usertype_query);
-
-    while ($row = mysqli_fetch_array($admin_usertype_query)) {
-
-        $usertype = $row['type'];
-    }
-
-
-    if ($usertype == 0) {
-
-        $candidate_admin = <<<DELIMETER
+            $candidate_admin = <<<DELIMETER
             <li><a href="../job_listing.php">Find a Job</a></li>
+            <li><a href="candidate_index.php">Admin</a></li>
         DELIMETER;
 
-        echo $candidate_admin;
+            echo $candidate_admin;
+        } elseif ($usertype == 1) {
+
+            $company_admin = <<<DELIMETER
+            <li><a href="company_index.php">Admin</a></li>
+            <li><a href="../company_applications.php">Applications</a></li>
+            <li><a href="../profile.php">Profile</a></li>
+        DELIMETER;
+
+            echo $company_admin;
+        }
+    } else {
+
+        $find_job_button = <<<DELIMETER
+
+        <li><a href="job_listing.php">Find a Job</a></li>
+
+DELIMETER;
+
+        echo $find_job_button;
     }
 }
-
-
-
-
-
-
-
-
-
-// function find_job_button_link_company()
-// {
-
-
-//     $username = $_SESSION['username'];
-
-//     $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
-//     confirm($admin_usertype_query);
-
-//     while ($row = mysqli_fetch_array($admin_usertype_query)) {
-
-//         $usertype = $row['type'];
-//     }
-
-
-//     if ($usertype == 0) {
-
-//         $candidate_admin = <<<DELIMETER
-//             <li><a href="../job_listing.php">Find a Job</a></li>
-//             DELIMETER;
-
-//         echo $candidate_admin;
-//     }
-// }
 
 
 
@@ -457,8 +415,8 @@ function show_login_logout_link()
 
         $login = <<<DELIMETER
 
-    <a href="../registration.php" class="btn head-btn1">Register</a>
-    <a href="../login.php" class="btn head-btn1">Login</a>
+    <a href="registration.php" class="btn head-btn1">Register</a>
+    <a href="login.php" class="btn head-btn1">Login</a>
 
 
     DELIMETER;
@@ -618,36 +576,79 @@ DELIMETER;
 function apply_button_in_job_details()
 {
 
-    $username = $_SESSION['username'];
-
-    $user_query = query("SELECT type FROM users WHERE username = '{$username}' ");
-    confirm($user_query);
-
-    while ($row = fetch_array($user_query)) {
-
-        $usertype = $row['type'];
-    }
-
-    $job_query = query("SELECT id FROM jobs WHERE id =" . escape_string($_GET['id']));
-    confirm($job_query);
+    if (IsLoggedIn()) {
 
 
+        $username = $_SESSION['username'];
+
+        $user_query = query("SELECT type FROM users WHERE username = '{$username}' ");
+        confirm($user_query);
+
+        while ($row = fetch_array($user_query)) {
+
+            $usertype = $row['type'];
+        }
+
+        $job_query = query("SELECT id FROM jobs WHERE id =" . escape_string($_GET['id']));
+        confirm($job_query);
 
 
+        if ($usertype == 0) {
 
-    if ($usertype == 0) {
 
+            $candidate_button = <<<DELIMETER
 
-        $candidate_button = <<<DELIMETER
-
-            <div class="apply-btn2">
+            <div class="apply-btn2 job_apply">
                 <a href="apply_job.php?id={$_GET['id']}"><button name="apply" type="submit" class="btn head-btn1">Apply Now</button></a>
             </div>
 
         DELIMETER;
 
-        echo $candidate_button;
-    } else {
+            echo $candidate_button;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+function apply_button_retrieve_button()
+{
+
+    if (IsLoggedIn()) {
+
+        $username = $_SESSION['username'];
+
+        $user_query = query("SELECT type FROM users WHERE username = '{$username}' ");
+        confirm($user_query);
+
+        while ($row = fetch_array($user_query)) {
+
+            $usertype = $row['type'];
+        }
+
+        $job_query = query("SELECT id FROM jobs WHERE id =" . escape_string($_GET['id']));
+        confirm($job_query);
+
+
+        if ($usertype == 0) {
+
+            $retrieve_button = <<<DELIMETER
+
+            <div class="retrieve-btn2 job_retrieve">
+                <a href="retrieve_job.php?id={$_GET['id']}"><button name="retrieve" type="submit" class="btn head-btn1">Retrieve Job!</button></a>
+            </div>
+
+    DELIMETER;
+
+            echo $retrieve_button;
+        }
     }
 }
 
@@ -707,6 +708,10 @@ function apply_button_in_job_details()
 //         }
 //     }
 // }
+
+
+
+
 
 
 
@@ -836,6 +841,58 @@ DELIMETER;
 
 
 
+function get_jobs_candidate_admin()
+{
+
+
+    $job_id_query = query("SELECT job_id FROM applications WHERE user_id = '{$_SESSION['user_id']}' ");
+
+    while ($row = fetch_array($job_id_query)) {
+
+        $job_id = $row['job_id'];
+
+
+        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' ");
+        confirm($query);
+
+        while ($row = fetch_array($query)) {
+
+            $candidate_selected_job = <<<DELIMETER
+
+
+<tr>
+<td>{$row['id']}</td>
+<td>{$row['title']}</td>
+<td>{$row['company_name']}</td>
+<td>{$row['description']}</td>
+<td>&#8377;{$row['salary']}</td>
+<td>{$row['location']}</td>
+<td>{$row['created_at']}</td>
+<td>
+    <div class="header-btn d-none f-right d-lg-block">
+        <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
+    </div>
+</td>
+</tr>
+
+DELIMETER;
+
+            echo $candidate_selected_job;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function add_jobs()
 {
 
@@ -863,7 +920,7 @@ function add_jobs()
         confirm($query);
 
         set_message("New job created !");
-        // redirect("company_index.php");
+        redirect("company_index.php");
     }
 }
 

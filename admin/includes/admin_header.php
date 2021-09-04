@@ -65,13 +65,7 @@ include "../includes/functions.php";
                                         <ul id="navigation">
                                             <li><a href="../index.php">Home</a></li>
                                             <?php
-
-                                            find_job_button_link();
-
-                                            // find_job_button_link_company();
-
                                             admin_link_user_type_admin();
-
                                             ?>
                                             <li><a href="../contact.php">Contact</a></li>
                                             <li><a href="../about.php">About</a></li>

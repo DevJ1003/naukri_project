@@ -5,21 +5,19 @@ include "includes/functions.php";
 
 if (isset($_GET['id'])) {
 
+
     $jobs_data_query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
     confirm($jobs_data_query);
 
     while ($row = fetch_array($jobs_data_query)) {
 
         $job_id = $_GET['id'];
-        $company_id = $row['company_id'];
     }
 
-    $user_id    =  $_SESSION['user_id'];
-    $username    =  $_SESSION['username'];
 
-    $query = query("INSERT INTO applications( job_id , user_id , company_id ) VALUES( '{$job_id}' , '{$user_id}' , '{$company_id}' ) ");
-    confirm($query);
+    $jobs_delete_data_query = query("DELETE FROM applications WHERE job_id = '{$job_id}' ");
+    confirm($jobs_delete_data_query);
 
-    set_message("You applied for this Job!");
+    set_message("You retrieved your application !");
     redirect("admin/candidate_index.php");
 }

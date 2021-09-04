@@ -61,7 +61,6 @@ if (isset($_GET['id'])) {
 <br>
 <!-- Hero Area End -->
 
-<?php display_message(); ?>
 
 <!-- job post company Start -->
 <div class="job-post-company pt-120 pb-120">
@@ -133,7 +132,13 @@ if (isset($_GET['id'])) {
                         <li>Salary : <span>&#8377; <?php echo $salary; ?> yearly</span></li>
                     </ul>
 
-                    <?php apply_button_in_job_details(); ?>
+                    <?php
+
+                    apply_button_in_job_details();
+
+                    apply_button_retrieve_button();
+
+                    ?>
 
                 </div>
                 <div class="post-details3  mb-50">
