@@ -15,6 +15,16 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+                    <?php login_find_add_job_link(); ?>
+
+
+
+
                 </div>
             </div>
         </div>

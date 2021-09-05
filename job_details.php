@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
 
         while ($row = fetch_array($company_data_query)) {
 
-
+            $company_id = $row['user_id'];
             $company_description = $row['description'];
             $company_image = $row['image'];
             $company_email = $row['email'];
@@ -72,7 +72,7 @@ if (isset($_GET['id'])) {
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="company.php?id="><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
+                            <a href="company_details.php?id=<?php echo $company_id; ?>"><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
                         </div>
                         <div class="job-tittle">
                             <h4><?php echo $title; ?></h4>
@@ -152,6 +152,11 @@ if (isset($_GET['id'])) {
                         <li>Name: <span><?php echo $company_name; ?></span></li>
                         <li>Web : <span> colorlib.com</span></li>
                         <li>Email: <span><?php echo $company_email; ?></span></li>
+                        <li>
+                            <div class="company-details">
+                                <a href="company_details.php?id=<?php echo $company_id; ?>"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

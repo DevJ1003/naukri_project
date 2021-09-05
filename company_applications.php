@@ -19,28 +19,26 @@
 <!-- Hero Area End -->
 
 <div class="container">
-    <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
-        All Jobs...!!
-    </h1>
-    <h4 class="text-center bg-info"><?php //display_message(); 
-                                    ?></h4>
 
+
+    <!-- TABLE -->
     <table class="table">
         <!-- <table class="table" style="min-height: 400px;"> -->
 
         <thead>
             <tr>
-                <th>Id</th>
+                <!-- <th>Id</th> -->
                 <th>Name</th>
                 <th>Description</th>
                 <th>(&#8377;)Salary</th>
                 <th>Location</th>
                 <th>Applied At</th>
-                <th>Actions</th>
+                <th>Candidate</th>
+                <th>Job</th>
             </tr>
         </thead>
         <tbody>
-            <?php //get_jobs_company_admin(); 
+            <?php get_applied_jobs_company_admin();
             ?>
         </tbody>
     </table>

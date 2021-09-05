@@ -65,8 +65,12 @@ include "functions.php";
                                         <ul id="navigation">
                                             <li><a href="index.php">Home</a></li>
                                             <?php admin_link_user_type_home(); ?>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="about.php">About</a></li>
+                                            <li><a href="#">More</a>
+                                                <ul class="submenu">
+                                                    <li><a href="contact.php">Contact</a></li>
+                                                    <li><a href="about.php">About</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>

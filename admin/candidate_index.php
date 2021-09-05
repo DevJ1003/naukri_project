@@ -20,7 +20,7 @@
 
 <div class="container">
     <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
-        Your Selected Jobs...!!
+        Your Applied Jobs...!!
     </h1>
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 

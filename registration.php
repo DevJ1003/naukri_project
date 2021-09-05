@@ -3,7 +3,7 @@
 <h1 class="text-center" style="text-align: center;">REGISTRATION</h1>
 
 <!-- login form starts -->
-<form class="text-center" style="text-align: center;" method="post">
+<form class="text-center" style="text-align: center;" method="post" enctype="multipart/form-data">
 
     <?php register_user(); ?>
 
@@ -18,7 +18,8 @@
     </div>
 
 
-    <div class="form-group"><label for="image">User Image</label>
+    <div class="form-group">
+        <label for="image">User Image</label>
         <input type="file" name="file">
     </div>
 

@@ -34,3 +34,10 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
+
+<!-- CUSTOM JS CODE HERE -->
+<script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

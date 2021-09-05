@@ -46,7 +46,7 @@ if (isset($_SESSION['username'])) {
     </h1>
 
     <form action="" method="post" enctype="multipart/form-data">
-        <?php update_profile(); ?>
+        <?php update_profile_company(); ?>
 
         <div class="col-md-6">
 
@@ -61,7 +61,7 @@ if (isset($_SESSION['username'])) {
             </div>
 
             <div class="form-group">
-                <label for="image">LOGO</label>
+                <label for="image">IMAGE</label>
                 <input type="file" name="file"><br>
                 <img width="100" src="images/<?php echo $image; ?>" alt="">
             </div>
