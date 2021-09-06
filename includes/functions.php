@@ -148,6 +148,14 @@ function register_user()
         $query = query($generated_query);
         confirm($query);
 
+
+        if ($user_type == 0) {
+
+            $candidate_query = "INSERT INTO candidate ( name ) VALUES ( '{$username}' ) ";
+            $query = query($candidate_query);
+            confirm($candidate_query);
+        }
+
         redirect("login.php");
         set_message("User Registered !!");
     }
@@ -190,7 +198,7 @@ function login_user()
                 $_SESSION['type']     = $usertype;
                 redirect("admin/candidate_index.php");
             }
-        } else {
+        } elseif ($usertype == 1) {
 
             if (mysqli_num_rows($query) == 0) {
 
@@ -203,6 +211,20 @@ function login_user()
                 $_SESSION['password'] = $password;
                 $_SESSION['type']     = $usertype;
                 redirect("admin/company_index.php");
+            }
+        } else {
+
+            if (mysqli_num_rows($query) == 0) {
+
+                set_message("Your Username or Password is wrong !");
+                redirect("login.php");
+            } else {
+
+                $_SESSION['user_id']  = $userid;
+                $_SESSION['username'] = $username;
+                $_SESSION['password'] = $password;
+                $_SESSION['type']     = $usertype;
+                redirect("admin/admin_index.php");
             }
         }
     }
@@ -242,8 +264,6 @@ function admin_link_user_type_home()
 
     if (IsLoggedIn()) {
 
-
-        $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
 
         $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
@@ -258,30 +278,31 @@ function admin_link_user_type_home()
         if ($usertype == 0) {
 
             $candidate_admin = <<<DELIMETER
-            <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
-            <li><a href="admin/candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
-            <li><a href="candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
-          
-        DELIMETER;
-
+                <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+                <li><a href="admin/candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
+            DELIMETER;
             echo $candidate_admin;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_admin = <<<DELIMETER
-            <li><a href="admin/company_index.php"><i class="fas fa-user"></i> Admin</a></li>
-            <li><a href="company_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
-        DELIMETER;
-
+                <li><a href="admin/company_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="company_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
+            DELIMETER;
             echo $company_admin;
+        } else {
+
+            $admin = <<<DELIMETER
+                <li><a href="admin/admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
+            DELIMETER;
+            echo $admin;
         }
     } else {
 
         $find_job_button = <<<DELIMETER
+            <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
 
-        <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
-
-DELIMETER;
-
+        DELIMETER;
         echo $find_job_button;
     }
 }
@@ -313,20 +334,27 @@ function admin_link_user_type_admin()
         if ($usertype == 0) {
 
             $candidate_admin = <<<DELIMETER
-            <li><a href="../job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
-            <li><a href="candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
-            <li><a href="../candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
-        DELIMETER;
+                <li><a href="../job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+                <li><a href="candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="../candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
+            DELIMETER;
 
             echo $candidate_admin;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_admin = <<<DELIMETER
-            <li><a href="company_index.php"><i class="fas fa-user"></i> Admin</a></li>
-            <li><a href="../company_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
-        DELIMETER;
-
+                <li><a href="company_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="../company_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
+            DELIMETER;
             echo $company_admin;
+        } else {
+
+            $admin = <<<DELIMETER
+
+                <li><a href="admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
+
+            DELIMETER;
+            echo $admin;
         }
     } else {
 
@@ -780,6 +808,48 @@ DELIMETER;
 
 
 
+function get_jobs_site_admin()
+{
+
+    $query = query("SELECT * FROM jobs");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $user_admin_job = <<<DELIMETER
+
+<tr>
+    <td>{$row['id']}</td>
+    <td>{$row['title']}</td>
+    <td>{$row['company_name']}</td>
+    <td>{$row['description']}</td>
+    <td>&#8377;{$row['salary']}</td>
+    <td>{$row['location']}</td>
+    <td>{$row['created_at']}</td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block">
+            <a href="job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block job_delete">
+            <a href="delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
+        </div>
+    </td>
+</tr>
+
+DELIMETER;
+
+        echo $user_admin_job;
+    }
+}
+
+
+
+
+
+
+
 
 
 
@@ -871,7 +941,7 @@ function apply_button_in_job_details()
             $candidate_button = <<<DELIMETER
 
             <div class="apply-btn2 job_apply">
-                <a href="apply_job.php?id={$_GET['id']}"><button name="apply" type="submit" class="btn head-btn1">Apply Now</button></a>
+                <a href="apply_job.php?id={$_GET['id']}"><button name="apply" type="submit" class="btn head-btn1">Apply Now !</button></a>
             </div>
 
         DELIMETER;
@@ -883,7 +953,7 @@ function apply_button_in_job_details()
         $apply_login_button = <<<DELIMETER
 
         <div class="apply-btn2">
-            <a href="login.php"><button name="apply" type="submit" class="btn head-btn1">Apply Now</button></a>
+            <a href="login.php"><button name="apply" type="submit" class="btn head-btn1">Apply Now !</button></a>
         </div>
 
     DELIMETER;
@@ -971,7 +1041,7 @@ function view_button_job_details()
         if ($usertype == 0) {
             $candidate_button = <<<DELIMETER
                 <div class="company-details">
-                    <a href="company_details.php?id=$company_id"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
+                    <a href="company_details.php?id=$company_id"><button name="company_details" type="submit" class="btn head-btn1">View Details !</button></a>
                 </div>
             DELIMETER;
 
@@ -981,7 +1051,7 @@ function view_button_job_details()
 
         $apply_login_button = <<<DELIMETER
                 <div class="company-details">
-                    <a href="login.php"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
+                    <a href="login.php"><button name="company_details" type="submit" class="btn head-btn1">View Details !</button></a>
                 </div>
     DELIMETER;
 
@@ -1116,7 +1186,7 @@ function update_profile_company()
             $username = $_SESSION['username'];
             $query = query("SELECT * FROM users WHERE username = '{$username}' ");
 
-            while ($row = mysqli_fetch_array($query)) {
+            while ($row = fetch_array($query)) {
 
                 $image = $row['image'];
             }
@@ -1141,7 +1211,7 @@ function update_profile_company()
 
 
 
-function create_candidate_profile()
+function update_candidate_profile()
 {
 
 
@@ -1149,26 +1219,43 @@ function create_candidate_profile()
 
         $username = $_SESSION['username'];
 
+
         $description = $_POST['candidate_description'];
 
-        $cv        = $_FILES['pdf']['cv_name'];
-        $temp_cv   = $_FILES['pdf']['cv_tmp_name'];
+        $cv        = $_FILES['file1']['name'];
+        $temp_cv   = $_FILES['file1']['tmp_name'];
 
         $knowledge   = $_POST['candidate_knowledge'];
         $skills      = $_POST['candidate_skills'];
         $education   = $_POST['candidate_education'];
         $experience  = $_POST['candidate_experience'];
 
-        $image        = $_FILES['file']['name'];
-        $temp_image   = $_FILES['file']['tmp_name'];
+        $image        = $_FILES['file2']['name'];
+        $temp_image   = $_FILES['file2']['tmp_name'];
 
 
         move_uploaded_file($temp_cv, "candidate_cv/$cv");
         move_uploaded_file($temp_image, "images/$image");
 
-        $query = "INSERT INTO candidate( name , description , cv , knowledge , skills , education , experience , image ) VALUES( '{$username}' , '{$description}' , '{$cv}' , '{$knowledge}' , '{$skills}' , '{$education}' , '{$experience}' , '{$image}' )";
-        $update_query = query($query);
-        confirm($update_query);
+
+        if (empty($image)) {
+
+            $username = $_SESSION['username'];
+            $query = query("SELECT * FROM users WHERE username = '{$username}' ");
+
+            while ($row = fetch_array($query)) {
+
+                $image = $row['image'];
+            }
+        }
+
+
+        /* QUERY */
+        $profile_query = "UPDATE candidate SET description = '{$description}' , cv = '{$cv}' , knowledge = '{$knowledge}' , skills = '{$skills}' , education = '{$education}' , experience = '{$experience}' , image = '{$image}' ";
+        $profile_query .= "WHERE name = '{$username}' ";
+        $query = query($profile_query);
+        confirm($query);
+
 
         set_message("Your profile has been updated !");
         redirect("admin/candidate_index.php");
@@ -1386,6 +1473,64 @@ function get_applied_jobs_company_admin()
 
                 echo $show_applied_job_details;
             }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function get_application_status_job()
+{
+
+
+    $job_query = query("SELECT * FROM applications WHERE user_id = '{$_SESSION['user_id']}' ");
+
+    while ($row = fetch_array($job_query)) {
+
+        $job_id = $row['job_id'];
+        $status = $row['status'];
+
+        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' ");
+        confirm($query);
+
+        while ($row = fetch_array($query)) {
+
+            $job_title = $row['title'];
+            $job_description = $row['description'];
+            $job_company_id = $row['company_id'];
+            $job_company_name = $row['company_name'];
+
+            $status_job = <<<DELIMETER
+
+
+<tr>
+<td>{$job_title}</td>
+<td>{$job_description}</td>
+<td>
+    <div class="header-btn d-none d-lg-block">
+        <a href="job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
+    </div>
+</td>
+<td>
+    <div class="header-btn d-none d-lg-block">
+        <a href="company_details.php?id={$job_company_id}" class="btn border-btn head-btn1">View</a>
+    </div>
+</td>
+<td>{$status}</td>
+</tr>
+
+DELIMETER;
+
+            echo $status_job;
         }
     }
 }

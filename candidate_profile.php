@@ -48,7 +48,7 @@ if (isset($_SESSION['username'])) {
     </h1>
 
     <form action="" method="post" enctype="multipart/form-data">
-        <?php create_candidate_profile(); ?>
+        <?php update_candidate_profile(); ?>
 
         <div class="col-md-6">
 
@@ -57,11 +57,13 @@ if (isset($_SESSION['username'])) {
                 <textarea type="text" name="candidate_description" id="" cols="30" rows="10" class="form-control"><?php echo $description; ?></textarea>
             </div>
 
+            <hr>
             <div class="form-group">
                 <label for="cv">CV</label>
-                <input type="file" name="pdf"><br>
-                <img width="100" src="candidate_cv/<?php echo $cv; ?>" alt="">
+                <input type="file" name="file1"><br>
+                ( User must upload cv/resume everytime while updating profile ! )
             </div>
+            <hr>
 
             <div class=" form-group">
                 <label for="candidate-knowledge">KNOWLEDGE</label>
@@ -84,15 +86,16 @@ if (isset($_SESSION['username'])) {
             </div>
 
 
-
+            <hr>
             <div class="form-group">
                 <label for="image">IMAGE</label>
-                <input type="file" name="file"><br>
+                <input type="file" name="file2"><br>
                 <img width="100" src="images/<?php echo $image; ?>" alt="">
             </div>
+            <hr>
 
             <div class="form-group">
-                <button name="update" type="submit" class="btn head-btn2">Complete<span class="glyphicon glyphicon-ok"></span></button>
+                <button name="update" type="submit" class="btn head-btn2">Complete your profile !<span class="glyphicon glyphicon-ok"></span></button>
             </div>
 
         </div>

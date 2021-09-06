@@ -69,7 +69,7 @@ if (isset($_SESSION['username'])) {
             </div>
 
             <div class="form-group">
-                <button name="update" type="submit" class="btn head-btn2">Complete<span class="glyphicon glyphicon-ok"></span></button>
+                <button name="update" type="submit" class="btn head-btn2">Complete your profile !<span class="glyphicon glyphicon-ok"></span></button>
             </div>
 
         </div>

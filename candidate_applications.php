@@ -30,13 +30,13 @@
                 <!-- <th>Id</th> -->
                 <th>Name</th>
                 <th>Description</th>
-                <th>Job</th>
-                <th>Company</th>
+                <th>View Job</th>
+                <th>View Company</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <?php //get_application_status_job();
+            <?php get_application_status_job();
             ?>
         </tbody>
     </table>

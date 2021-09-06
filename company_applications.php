@@ -33,13 +33,12 @@
                 <th>(&#8377;)Salary</th>
                 <th>Location</th>
                 <th>Applied At</th>
-                <th>Candidate</th>
-                <th>Job</th>
+                <th>View Candidate</th>
+                <th>View Job</th>
             </tr>
         </thead>
         <tbody>
-            <?php get_applied_jobs_company_admin();
-            ?>
+            <?php get_applied_jobs_company_admin(); ?>
         </tbody>
     </table>
 </div>

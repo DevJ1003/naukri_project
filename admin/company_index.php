@@ -35,7 +35,9 @@
                 <th>(&#8377;)Salary</th>
                 <th>Location</th>
                 <th>Posted At</th>
-                <th>Actions</th>
+                <th>View Job</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>

@@ -6,8 +6,8 @@
 3 types of user types
 
 1. Admin
-2. Client/company
-3. Candidate
+2. Client/company ====================================yes
+3. Candidate ============================================yes
 
 Admin View : 
 
@@ -24,15 +24,16 @@ Client/Company view
 1. Post jobs - job create, edit, delete, view       ==========================yes
 2. View its posted jobs - list view of all the jobs posted  ==================yes
 3. Applications received ================================================yes
-4. reject/accept applications
-5. message candidate
+4. reject/accept applications ==================================================yes
+5. message candidate ====================================================yes         ( not working! ) + contact.php
 
 
 Candidate view
-1. view all jobs  ================================yes
-2. View its applied jobs  ========================yes
-3. Applications sent =============================yes
-4. retrieve application ==========================yes
+1. view all jobs  =======================================yes
+2. View its applied jobs  ================================yes
+3. Applications sent =======================================yes
+4. retrieve application ==============================yes
+5. reject/accept applications view ====================yes
 
 User Account management
 
