@@ -30,7 +30,7 @@ if (isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fa fa-fw fa-table" style="font-size:240px;"></i><?php echo $_SESSION['username']; ?>'s Profile...!!</h2>
+                        <h2><i class="far fa-address-book" style="font-size:240px;"></i> <?php echo $_SESSION['username']; ?>'s Profile...!!</h2>
                     </div>
                 </div>
             </div>

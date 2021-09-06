@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Welcome to <?php echo $_SESSION['username'] ?>'s Admin page !</h2>
+                        <h2>Hi , Welcome to <?php echo $_SESSION['username'] ?>'s Admin page !</h2>
                     </div>
                 </div>
             </div>

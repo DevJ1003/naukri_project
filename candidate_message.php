@@ -1,4 +1,33 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/header.php";
+
+if (isset($_GET['id'])) {
+
+    $query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $candidate_id = escape_string($row['user_id']);
+        $candidate_name = escape_string($row['username']);
+    }
+
+
+    $details_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
+    confirm($details_query);
+
+    while ($row = fetch_array($details_query)) {
+
+        $candidate_description = $row['description'];
+        $candidate_cv          = $row['cv'];
+        $candidate_knowledge   = $row['knowledge'];
+        $candidate_skills      = $row['skills'];
+        $candidate_education   = $row['education'];
+        $candidate_experience  = $row['experience'];
+        $candidate_image       = $row['image'];
+    }
+}
+
+?>
 
 <!-- Hero Area Start-->
 <div class="slider-area ">
@@ -7,7 +36,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="far fa-paper-plane" style="font-size:240px;"></i> Contact us</h2>
+                        <h2><i class="far fa-paper-plane" style="font-size:120px;"></i> Message Candidate...!!</h2>
                     </div>
                 </div>
             </div>
@@ -21,12 +50,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h2 class="contact-title">For any query , ask us !</h2>
+            <h2 class="contact-title">For any query , message candidate !</h2>
             <?php display_message(); ?>
         </div>
 
         <div class="col-lg-8">
-            <form name="sentMessage" method="post" id="contactForm">
+            <form name="sentMessage" method="post" id="contactForm" enctype="multipart/form-data">
                 <?php send_message(); ?>
                 <div class="row">
 
@@ -57,48 +86,18 @@
                         </div>
                     </div>
 
-                    <?php var_dump(send_message()); ?>
+                    <?php //var_dump(send_message()); 
+                    ?>
 
                     <div class="form-group mt-3">
-                        <button name="submit" type="submit" class="button button-contactForm boxed-btn">Send</button>
+                        <button name="submit" type="submit" class="button button-contactForm boxed-btn btn head-btn2">Send</button>
                     </div>
                 </div>
             </form>
         </div>
-
-
-        <!-- SIDEBAR DISPLAY ITEMS -->
-        <div class="col-lg-3 offset-lg-1">
-
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-home"></i></span>
-                <div class="media-body">
-                    <h3>State , Country.</h3>
-                    <p>City , Pin-Code</p>
-                </div>
-            </div>
-
-
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                <div class="media-body">
-                    <h3>+91 0000 1111 22</h3>
-                    <p>Mon to Fri <br> 9:00 AM to 6:00 PM</p>
-                </div>
-            </div>
-
-
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-email"></i></span>
-                <div class="media-body">
-                    <h3>support@nAukri.com</h3>
-                    <p>Send us your query anytime!</p>
-                </div>
-            </div>
-
-        </div>
     </div>
 </div>
+<br>
 <!-- ================ contact section end ================= -->
 
-<?php include "includes/footer.php"; ?>
+<?php include "includes/footer_short.php"; ?>

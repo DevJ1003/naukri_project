@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fas fa-bell" style="font-size: 200px;"></i> Job Applications Received !</h2>
+                        <h2><i class="fas fa-bell" style="font-size: 200px;"></i> Job Applications Status !</h2>
                     </div>
                 </div>
             </div>
@@ -30,15 +30,13 @@
                 <!-- <th>Id</th> -->
                 <th>Name</th>
                 <th>Description</th>
-                <th>(&#8377;)Salary</th>
-                <th>Location</th>
-                <th>Applied At</th>
-                <th>Candidate</th>
                 <th>Job</th>
+                <th>Company</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <?php get_applied_jobs_company_admin();
+            <?php //get_application_status_job();
             ?>
         </tbody>
     </table>

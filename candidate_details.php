@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><?php echo $candidate_name; ?>'s Details Page...!!</h2>
+                        <h2><i class="fas fa-address-card" style="font-size: 200px;"></i> Candidate's Details Page...!!</h2>
                     </div>
                 </div>
             </div>
@@ -47,6 +47,7 @@ if (isset($_GET['id'])) {
 <br>
 <!-- Hero Area End -->
 
+<h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
 <!-- job post company Start -->
 <div class="job-post-company pt-120 pb-120">
@@ -74,7 +75,7 @@ if (isset($_GET['id'])) {
                     <div class=" post-details mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Candidate Description</h4>
+                            <h4><i class="fas fa-newspaper" style="font-size: 30px;"></i> Candidate Description</h4>
                         </div>
                         <p><?php echo $candidate_description; ?></p>
                     </div>
@@ -85,7 +86,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Knowledgable to :</h4>
+                        <h4><i class="far fa-list-alt" style="font-size: 30px;"></i> Knowledgable to...</h4>
                     </div>
                     <ul>
                         <?php echo $candidate_knowledge; ?>
@@ -96,7 +97,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Skills :</h4>
+                        <h4><i class="fas fa-user-plus" style="font-size: 30px;"></i> Skills</h4>
                     </div>
                     <ul>
                         <?php echo $candidate_skills; ?>
@@ -106,7 +107,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Education :</h4>
+                        <h4><i class="fas fa-graduation-cap" style="font-size: 30px;"></i> Education</h4>
                     </div>
                     <ul>
                         <?php echo $candidate_education; ?>
@@ -127,7 +128,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details3  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Candidate Overview...!!</h4>
+                        <h4><i class="fas fa-address-card" style="font-size: 40px;"></i> CANDIDATE OVERVIEW...!!</h4>
                     </div>
                     <ul>
                         <li><span>This is the official candidate account of <?php echo $candidate_name; ?> on nAukri.com .
@@ -135,9 +136,22 @@ if (isset($_GET['id'])) {
                                 and i also know <?php echo $candidate_skills; ?> , I have a experience of about <?php echo $candidate_experience; ?> .
                                 Please find my Resume attached under .</span></li>
                     </ul>
-                    <div class="company-details">
+                    <div class="candidate-details">
                         <a href="candidate_cv/<?php echo $candidate_cv; ?>"><button name="company_details" type="submit" class="btn head-btn1">View CV</button></a>
                     </div>
+                    <br>
+                    <div class="send-accept">
+                        <a href="accept_application.php?id=<?php echo $candidate_id; ?>"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
+                    </div>
+                    <br>
+                    <div class="send-reject">
+                        <a href="reject_application.php?id=<?php echo $candidate_id; ?>"><button name="reject_application" type="reject-application" class="btn head-btn1">Reject Application !</button></a>
+                    </div>
+                    <br>
+                    <div class="send-message">
+                        <a href="candidate_message.php?id=<?php echo $candidate_id; ?>"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate !</button></a>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>A warm welcome to <?php echo $company_name; ?>'s official Account...!!</h2>
+                        <h2><i class="fas fa-address-card" style="font-size: 200px;"></i> A warm welcome to <?php echo $company_name; ?>'s official Account...!!</h2>
                     </div>
                 </div>
             </div>
@@ -36,6 +36,9 @@ if (isset($_GET['id'])) {
 </div>
 <br>
 <!-- Hero Area End -->
+
+
+<?php display_message(); ?>
 
 
 <!-- job post company Start -->
@@ -65,7 +68,7 @@ if (isset($_GET['id'])) {
                     <div class=" post-details1 mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Job Description</h4>
+                            <h4><i class="fas fa-newspaper" style="font-size: 30px;"></i> Company Description</h4>
                         </div>
                         <p><?php echo $company_description; ?></p>
                     </div>
@@ -76,7 +79,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details2  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>All jobs posted by <?php echo $company_name; ?> are :</h4>
+                        <h4><i class="far fa-list-alt" style="font-size: 30px;"></i> All jobs posted by <?php echo $company_name; ?> are :</h4>
                     </div>
                     <ul>
                         <?php job_company_details(); ?>
@@ -96,7 +99,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details3  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Company Overview...!!</h4>
+                        <h4><i class="far fa-address-card" style="font-size: 40px;"></i> COMPANY OVERVIEW...!!</h4>
                     </div>
                     <ul>
                         <li><span>This is the official company account of <?php echo $company_name; ?> on nAukri.com , here we provide internships

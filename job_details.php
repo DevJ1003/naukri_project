@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                         <div class="job-tittle">
                             <h4><?php echo $title; ?></h4>
                             <ul>
-                                <li><?php echo $company_name; ?></li>
+                                <li><i class="fas fa-user"></i><?php echo $company_name; ?></li>
                                 <li><i class="fas fa-map-marker-alt"></i><?php echo $location; ?></li>
                                 <li>&#8377; <?php echo $salary; ?></li>
                             </ul>
@@ -90,14 +90,14 @@ if (isset($_GET['id'])) {
                     <div class="post-details1 mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Job Description</h4>
+                            <h4><i class="far fa-newspaper" style="font-size: 30px;"></i> Job Description</h4>
                         </div>
                         <p><?php echo $description; ?></p>
                     </div>
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Required Knowledge, Skills and Abilities</h4>
+                            <h4><i class="far fa-list-alt" style="font-size: 30px;"></i> Required Knowledge, Skills and Abilities</h4>
                         </div>
                         <ul>
                             <li><?php echo $knowledge; ?></li>
@@ -107,7 +107,7 @@ if (isset($_GET['id'])) {
                     <div class="post-details2  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Education + Experience</h4>
+                            <h4><i class="fas fa-graduation-cap" style="font-size: 30px;"></i> Education + Experience</h4>
                         </div>
                         <ul>
                             <li><?php echo $education; ?></li>
@@ -122,7 +122,7 @@ if (isset($_GET['id'])) {
                 <div class="post-details3  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>JOB OVERVIEW</h4>
+                        <h4><i class="fas fa-chart-line" style="font-size: 40px;"></i> JOB OVERVIEW...!!</h4>
                     </div>
                     <ul>
                         <li>Posted date : <span><?php echo $posted_on; ?></span></li>
@@ -144,18 +144,21 @@ if (isset($_GET['id'])) {
                 <div class="post-details3  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
-                        <h4>Company Information :</h4>
+                        <h4><i class="fas fa-industry" style="font-size: 40px;"></i> COMPANY OVERVIEW...!!</h4>
                     </div>
                     <span><?php echo $company_name; ?></span>
                     <p><?php echo $company_description; ?></p>
                     <ul>
-                        <li>Name: <span><?php echo $company_name; ?></span></li>
-                        <li>Web : <span> colorlib.com</span></li>
-                        <li>Email: <span><?php echo $company_email; ?></span></li>
+                        <li><i class="fas fa-archive" style="font-size: 25px;"></i> <span><?php echo $company_name; ?></span></li>
+                        <li><i class="fas fa-desktop" style="font-size: 25px;"></i> <span> www.<?php echo $company_name; ?>.com</span></li>
+                        <li><i class="far fa-envelope" style="font-size: 25px;"></i> <span><?php echo $company_email; ?></span></li>
                         <li>
-                            <div class="company-details">
-                                <a href="company_details.php?id=<?php echo $company_id; ?>"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
-                            </div>
+                            <!-- <div class="company-details">
+                                <a href="company_details.php?id=<?php //echo $company_id; 
+                                                                ?>"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
+                            </div> -->
+
+                            <?php view_button_job_details(); ?>
                         </li>
                     </ul>
                 </div>

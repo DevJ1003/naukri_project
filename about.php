@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>About us</h2>
+                            <h2><i class="fas fa-anchor" style="font-size:240px;"></i> About us</h2>
                         </div>
                     </div>
                 </div>

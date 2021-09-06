@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fa fa-fw fa-table" style="font-size:240px;"></i><?php echo $_SESSION['username']; ?>'s Profile...!!</h2>
+                        <h2><i class="far fa-address-book" style="font-size:240px;"></i> <?php echo $_SESSION['username']; ?>'s Profile...!!</h2>
                     </div>
                 </div>
             </div>
@@ -40,10 +40,7 @@ if (isset($_SESSION['username'])) {
 
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
-
-    <h1 class="page-header"><i class="fa fa-fw fa-table"></i>
-        Your Profile...!!
-    </h1>
+    <br>
 
     <form action="" method="post" enctype="multipart/form-data">
         <?php update_profile_company(); ?>
@@ -82,4 +79,4 @@ if (isset($_SESSION['username'])) {
 <!-- /#page-wrapper -->
 <br>
 
-<?php include "includes/footer.php"; ?>
+<?php include "includes/footer_short.php"; ?>

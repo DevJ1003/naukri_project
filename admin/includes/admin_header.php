@@ -63,14 +63,15 @@ include "../includes/functions.php";
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="../index.php">Home</a></li>
+                                            <li><a href="../index.php"><i class="fas fa-home"></i> Home</a></li>
                                             <?php
                                             admin_link_user_type_admin();
                                             ?>
-                                            <li><a href="#">More</a>
+                                            <li><a href="#"><i class="fab fa-font-awesome-flag"></i> More</a>
                                                 <ul class="submenu">
-                                                    <li><a href="../contact.php">Contact</a></li>
-                                                    <li><a href="../about.php">About</a></li>
+                                                    <?php profile_link_admin(); ?>
+                                                    <li><a href="../contact.php"><i class="far fa-paper-plane"></i> Contact</a></li>
+                                                    <li><a href="../about.php"><i class="fas fa-anchor"></i> About</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
