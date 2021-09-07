@@ -182,49 +182,50 @@ function login_user()
             $username = $row['username'];
             $password = $row['password'];
             $usertype = $row['type'];
-        }
+            $status = $row['status'];
 
 
-        if ($usertype == 0) {
+            if ($usertype == 0 && $status == 0) {
 
-            if (mysqli_num_rows($query) == 0) {
+                if (mysqli_num_rows($query) == 0) {
 
-                set_message("Your Username or Password is wrong !");
-                redirect("login.php");
-            } else {
-                $_SESSION['user_id']  = $userid;
-                $_SESSION['username'] = $username;
-                $_SESSION['password'] = $password;
-                $_SESSION['type']     = $usertype;
-                redirect("admin/candidate_index.php");
-            }
-        } elseif ($usertype == 1) {
+                    set_message("Your Username or Password is wrong !");
+                    redirect("login.php");
+                } else {
+                    $_SESSION['user_id']  = $userid;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['type']     = $usertype;
+                    redirect("admin/candidate_index.php");
+                }
+            } elseif ($usertype == 1 && $status == 0) {
 
-            if (mysqli_num_rows($query) == 0) {
+                if (mysqli_num_rows($query) == 0) {
 
-                set_message("Your Username or Password is wrong !");
-                redirect("login.php");
-            } else {
+                    set_message("Your Username or Password is wrong !");
+                    redirect("login.php");
+                } else {
 
-                $_SESSION['user_id']  = $userid;
-                $_SESSION['username'] = $username;
-                $_SESSION['password'] = $password;
-                $_SESSION['type']     = $usertype;
-                redirect("admin/company_index.php");
-            }
-        } else {
+                    $_SESSION['user_id']  = $userid;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['type']     = $usertype;
+                    redirect("admin/company_index.php");
+                }
+            } elseif ($usertype == 2 && $status == 0) {
 
-            if (mysqli_num_rows($query) == 0) {
+                if (mysqli_num_rows($query) == 0) {
 
-                set_message("Your Username or Password is wrong !");
-                redirect("login.php");
-            } else {
+                    set_message("Your Username or Password is wrong !");
+                    redirect("login.php");
+                } else {
 
-                $_SESSION['user_id']  = $userid;
-                $_SESSION['username'] = $username;
-                $_SESSION['password'] = $password;
-                $_SESSION['type']     = $usertype;
-                redirect("admin/admin_index.php");
+                    $_SESSION['user_id']  = $userid;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['type']     = $usertype;
+                    redirect("admin/admin_index.php");
+                }
             }
         }
     }
@@ -828,7 +829,7 @@ function count_companies()
 function get_jobs()
 {
 
-    $query = query("SELECT * FROM jobs");
+    $query = query("SELECT * FROM jobs WHERE status = '0' ");
     confirm($query);
 
     while ($row = fetch_array($query)) {
@@ -879,11 +880,17 @@ function get_jobs_site_admin()
 <tr>
     <td>{$row['id']}</td>
     <td>{$row['title']}</td>
-    <td>{$row['company_name']}</td>
     <td>{$row['description']}</td>
-    <td>&#8377;{$row['salary']}</td>
-    <td>{$row['location']}</td>
-    <td>{$row['created_at']}</td>
+    <td>{$row['company_name']}</td>
+    <td>
+        <div class="send-activate activate_job">
+            <a href="activate_job.php?id={$row['id']}"><button name="activate_job" type="activate-job" class="btn head-btn1">Activate !</button></a>
+        </div>
+        <br>
+        <div class="send-deactivate deactivate_job">
+            <a href="deactivate_job.php?id={$row['id']}"><button name="deactivate_job" type="deactivate-job" class="btn head-btn1">Deactivate !</button></a>
+        </div>
+    </td>
     <td>
         <div class="header-btn d-none d-lg-block">
             <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
@@ -891,7 +898,7 @@ function get_jobs_site_admin()
     </td>
     <td>
         <div class="header-btn d-none d-lg-block job_delete">
-            <a href="delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
+            <a href="admin_delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
 </tr>
@@ -919,7 +926,7 @@ DELIMETER;
 function get_featured_jobs()
 {
 
-    $query = query("SELECT * FROM jobs");
+    $query = query("SELECT * FROM jobs WHERE status = '0' LIMIT 3");
     confirm($query);
 
     while ($row = fetch_array($query)) {
@@ -1000,16 +1007,22 @@ function get_all_companies()
     <td>{$row['username']}</td>
     <td>{$row['email']}</td>
     <td>{$row['description']}</td>
-    <td>{$row['capacity']}</td>
-    <td>{$row['location']}</td>
-    <td>{$row['status']}</td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block">
+        <div class="send-activate activate_company">
+            <a href="activate_company.php?id={$company_id}"><button name="activate_company" type="activate-company" class="btn head-btn1">Activate !</button></a>
+        </div>
+        <br>
+        <div class="send-deactivate deactivate_company">
+            <a href="deactivate_company.php?id={$company_id}"><button name="deactivate_company" type="deactivate-company" class="btn head-btn1">Deactivate !</button></a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none d-lg-block">
             <a href="../company_details.php?id={$company_id}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block company_delete">
+        <div class="header-btn d-none d-lg-block company_delete">
             <a href="delete_company.php?id={$company_id}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
@@ -1042,7 +1055,7 @@ function get_all_candidates()
         $candidate_id = $row['user_id'];
         $candidate_name = $row['username'];
         $candidate_email = $row['email'];
-        $candidate_status = $row['status'];
+        // $candidate_status = $row['status'];
 
 
 
@@ -1063,14 +1076,22 @@ function get_all_candidates()
     <td>{$candidate_name}</td>
     <td>{$candidate_email}</td>
     <td>{$row['description']}</td>
-    <td>{$candidate_status}</td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block">
+        <div class="send-activate activate_candidate">
+            <a href="activate_candidate.php?id={$candidate_id}"><button name="activate_candidate" type="activate-candidate" class="btn head-btn1">Activate !</button></a>
+        </div>
+        <br>
+        <div class="send-deactivate deactivate_candidate">
+            <a href="deactivate_candidate.php?id={$candidate_id}"><button name="deactivate_candidate" type="deactivate-candidate" class="btn head-btn1">Deactivate !</button></a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none d-lg-block">
             <a href="../candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block candidate_delete">
+        <div class="header-btn d-none d-lg-block candidate_delete">
             <a href="delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
@@ -1361,8 +1382,6 @@ function add_jobs()
         $company_id = $_SESSION['user_id'];
         $company_name = $_SESSION['username'];
         $title = $_POST['job_title'];
-        $user_id = "";
-        $username = "";
         $description = $_POST['job_description'];
         $vacancy = $_POST['job_vacancy'];
         $nature = $_POST['job_nature'];
@@ -1374,7 +1393,7 @@ function add_jobs()
         $location = $_POST['job_location'];
 
 
-        $query = query("INSERT INTO jobs( title , company_id , company_name , user_id , username , description , vacancy , nature , knowledge , skills , education , experience , salary , location) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' , '{$user_id}' , '{$username}' ,  '{$description}' , '{$vacancy}' , '{$nature}' , '{$knowledge}' , '{$skills}' , '{$education}' , '{$experience}' , '{$salary}' , '{$location}') ");
+        $query = query("INSERT INTO jobs( title , company_id , company_name , description , vacancy , nature , knowledge , skills , education , experience , salary , location) VALUES( '{$title}' , '{$company_id}' , '{$company_name}' ,  '{$description}' , '{$vacancy}' , '{$nature}' , '{$knowledge}' , '{$skills}' , '{$education}' , '{$experience}' , '{$salary}' , '{$location}') ");
         confirm($query);
 
         set_message("New job created !");
@@ -1561,7 +1580,7 @@ function get_jobs_company_admin()
 
     $username = $_SESSION['username'];
 
-    $query = query("SELECT * FROM jobs WHERE company_name = '{$username}' ");
+    $query = query("SELECT * FROM jobs WHERE company_name = '{$username}' AND status = '0' ");
     confirm($query);
 
     while ($row = fetch_array($query)) {
@@ -1577,17 +1596,17 @@ function get_jobs_company_admin()
 <td>{$row['location']}</td>
 <td>{$row['created_at']}</td>
 <td>
-    <div class="header-btn d-none f-right d-lg-block">
+    <div class="header-btn d-none d-lg-block">
         <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
     </div>
 </td>
 <td>
-    <div class="header-btn d-none f-right d-lg-block">
+    <div class="header-btn d-none d-lg-block">
         <a href="edit_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Update</a>
     </div>
 </td>
 <td>
-    <div class="header-btn d-none f-right d-lg-block job_delete">
+    <div class="header-btn d-none d-lg-block job_delete">
         <a href="delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
     </div>
 </td>
@@ -1620,7 +1639,7 @@ function get_jobs_candidate_admin()
         $job_id = $row['job_id'];
 
 
-        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' ");
+        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' AND status = '0' ");
         confirm($query);
 
         while ($row = fetch_array($query)) {
@@ -1637,7 +1656,7 @@ function get_jobs_candidate_admin()
 <td>{$row['location']}</td>
 <td>{$row['created_at']}</td>
 <td>
-    <div class="header-btn d-none f-right d-lg-block">
+    <div class="header-btn d-none d-lg-block">
         <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
     </div>
 </td>
@@ -1682,11 +1701,12 @@ function get_applied_jobs_company_admin()
 
 
         /* JOB TABLE QUERY */
-        $select_job_query = query("SELECT * FROM jobs WHERE id = '{$job_id}' ");
+        $select_job_query = query("SELECT * FROM jobs WHERE id = '{$job_id}' AND status = '0' ");
         confirm($select_job_query);
 
         while ($row = fetch_array($select_job_query)) {
 
+            $applied_job_id = $row['id'];
             $applied_job_title = $row['title'];
             $applied_job_descriptipon = $row['description'];
             $applied_job_salary = $row['salary'];
@@ -1708,6 +1728,7 @@ function get_applied_jobs_company_admin()
                 $show_applied_job_details = <<<DELIMETER
 
                     <tr>
+                        <td>{$applied_job_id}</td>
                         <td>{$applied_job_title}</td>
                         <td>{$applied_job_descriptipon}</td>
                         <td>&#8377;{$applied_job_salary}</td>
@@ -1755,7 +1776,7 @@ function get_application_status_job()
         $job_id = $row['job_id'];
         $status = $row['status'];
 
-        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' ");
+        $query = query("SELECT * FROM jobs WHERE id = '{$job_id}' AND status = '0' ");
         confirm($query);
 
         while ($row = fetch_array($query)) {
@@ -1763,12 +1784,12 @@ function get_application_status_job()
             $job_title = $row['title'];
             $job_description = $row['description'];
             $job_company_id = $row['company_id'];
-            $job_company_name = $row['company_name'];
 
             $status_job = <<<DELIMETER
 
 
 <tr>
+<td>{$job_id}</td>
 <td>{$job_title}</td>
 <td>{$job_description}</td>
 <td>

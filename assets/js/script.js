@@ -59,4 +59,83 @@ $(document).ready(function () {
 
 
 
+
+    $(".activate_candidate").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to activate this candidate account ?");
+
+    });
+
+
+
+
+
+    $(".deactivate_candidate").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to deactivate this candidate account ?");
+
+    });
+
+
+
+
+
+
+    $(".activate_company").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to activate this company account ?");
+
+    });
+
+
+
+
+
+    $(".deactivate_company").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to deactivate this company account ?");
+
+    });
+
+
+
+
+
+
+    $(".activate_job").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to activate this job ?");
+
+    });
+
+
+
+
+
+    $(".deactivate_job").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to deactivate this job ?");
+
+    });
+
+
+
 });

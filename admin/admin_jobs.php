@@ -30,12 +30,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Company</th>
+                <th>Job Title</th>
                 <th>Description</th>
-                <th>(&#8377;)Salary</th>
-                <th>Location</th>
-                <th>Posted At</th>
+                <th>Company Name</th>
+                <th>Status</th>
                 <th>View Job</th>
                 <th>Delete</th>
             </tr>

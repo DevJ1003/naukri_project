@@ -29,8 +29,6 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Description</th>
-                <th>Employees</th>
-                <th>Location</th>
                 <th>Status</th>
                 <th>View Company</th>
                 <th>Delete</th>

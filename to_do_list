@@ -5,32 +5,32 @@
 
 3 types of user types
 
-1. Admin
+1. Admin ============================================yes
 2. Client/company ====================================yes
 3. Candidate ============================================yes
 
 Admin View : 
 
 1. View All Jobs ====================================================yes
-2. View all candidates and details ========================================
-3. view all company dashboards
-4. view all candidate's dashboard
-5. Actiavate/Deactivate company account
-6. Actiavate/Deactivate candidate account
+2. View all candidates and details ========================================yes
+3. view all company dashboards =======================================yes
+4. view all candidate's dashboard =========================================yes
+5. Activate/Deactivate company account ======================================yes
+6. Activate/Deactivate candidate account ====================================yes
 7. Update company account details
 8. Update candidate account details
 
 Client/Company view
-1. Post jobs - job create, edit, delete, view       ==========================yes
-2. View its posted jobs - list view of all the jobs posted  ==================yes
+1. Post jobs - job create, edit, delete, view ======================================yes
+2. View its posted jobs - list view of all the jobs posted ========================yes
 3. Applications received ================================================yes
 4. reject/accept applications ==================================================yes
 5. message candidate ====================================================yes         ( not working! ) + contact.php
 
 
 Candidate view
-1. view all jobs  =======================================yes
-2. View its applied jobs  ================================yes
+1. view all jobs =============================================yes
+2. View its applied jobs =====================================yes
 3. Applications sent =======================================yes
 4. retrieve application ==============================yes
 5. reject/accept applications view ====================yes
@@ -38,7 +38,7 @@ Candidate view
 User Account management
 
 1. Resgiter ===============================yes
-2. Login  ==================================yes
+2. Login ========================================yes
 3. Forgot password
 
 ====================================
@@ -49,5 +49,3 @@ User Account management
 status -> boolean -> true/false
 created_at -> currrent timestamp
 updated_at -> current timestamp(on change)
-
-

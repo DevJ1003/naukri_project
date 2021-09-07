@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fa fa-fw fa-table" style="font-size:240px;"></i>UPDATE JOB !</h2>
+                        <h2><i class="fas fa-briefcase" style="font-size:240px;"></i> UPDATE JOB !</h2>
                     </div>
                 </div>
             </div>
