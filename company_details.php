@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fas fa-address-card" style="font-size: 200px;"></i> A warm welcome to <?php echo $company_name; ?>'s official Account...!!</h2>
+                        <h2><i class="fas fa-building" style="font-size: 240px;"></i> A warm welcome to <?php echo $company_name; ?>'s official Account...!!</h2>
                     </div>
                 </div>
             </div>

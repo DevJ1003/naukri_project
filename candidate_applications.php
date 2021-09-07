@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fas fa-bell" style="font-size: 200px;"></i> Job Applications Status !</h2>
+                        <h2><i class="fas fa-bell" style="font-size: 240px;"></i> Job Applications Status !</h2>
                     </div>
                 </div>
             </div>

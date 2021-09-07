@@ -264,6 +264,7 @@ function admin_link_user_type_home()
 
     if (IsLoggedIn()) {
 
+        $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
 
         $admin_usertype_query = query("SELECT type FROM users WHERE username = '{$username}' ");
@@ -294,6 +295,9 @@ function admin_link_user_type_home()
 
             $admin = <<<DELIMETER
                 <li><a href="admin/admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="admin/admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="admin/admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
+                <li><a href="admin/admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
             DELIMETER;
             echo $admin;
         }
@@ -352,6 +356,9 @@ function admin_link_user_type_admin()
             $admin = <<<DELIMETER
 
                 <li><a href="admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
+                <li><a href="admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
+                <li><a href="admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
 
             DELIMETER;
             echo $admin;
@@ -402,7 +409,7 @@ function profile_link_homepage()
         DELIMETER;
 
             echo $candidate_profile;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_profile = <<<DELIMETER
             <li><a href="company_profile.php?id={$user_id}"><i class="far fa-address-book"></i> Profile</a></li>
@@ -449,7 +456,7 @@ function profile_link_admin()
         DELIMETER;
 
             echo $candidate_profile;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_profile = <<<DELIMETER
             <li><a href="../company_profile.php?id={$user_id}"><i class="far fa-address-book"></i> Profile</a></li>
@@ -519,13 +526,20 @@ function login_find_add_job_link()
             DELIMETER;
 
             echo $candidate_homepage;
-        } else {
+        } elseif ($usertype == 1) {
 
             $company_homepage = <<<DELIMETER
                 <a href="admin/add_jobs.php" class="btn head-btn1">Post a new job !</a>
             DELIMETER;
 
             echo $company_homepage;
+        } else {
+
+            $admin_homepage = <<<DELIMETER
+                <a href="admin/admin_index.php" class="btn head-btn1">View all jobs !</a>
+            DELIMETER;
+
+            echo $admin_homepage;
         }
     } else {
 
@@ -573,13 +587,20 @@ function browse_sector_link()
                 DELIMETER;
 
             echo $browse_sector_link_candidate;
-        } else {
+        } elseif ($usertype == 1) {
 
             $browse_sector_link_company = <<<DELIMETER
                 <a href="admin/company_index.php" class="border-btn2">Browse All Jobs !</a>
                 DELIMETER;
 
             echo $browse_sector_link_company;
+        } else {
+
+            $browse_sector_link_admin = <<<DELIMETER
+                <a href="admin/admin_index.php" class="border-btn2">Browse All Data !</a>
+                DELIMETER;
+
+            echo $browse_sector_link_admin;
         }
     } else {
 
@@ -751,13 +772,50 @@ function send_message()
 function count_jobs()
 {
 
-
     $query = query("SELECT id FROM jobs");
     confirm($query);
 
     $jobs_count = mysqli_num_rows($query);
 
     echo $jobs_count;
+}
+
+
+
+
+
+
+
+
+function count_candidates()
+{
+
+
+    $query = query("SELECT user_id FROM users WHERE type = 0");
+    confirm($query);
+
+    $candidate_count = mysqli_num_rows($query);
+
+    echo $candidate_count;
+}
+
+
+
+
+
+
+
+
+function count_companies()
+{
+
+
+    $query = query("SELECT user_id FROM users WHERE type = 1");
+    confirm($query);
+
+    $company_count = mysqli_num_rows($query);
+
+    echo $company_count;
 }
 
 
@@ -816,7 +874,7 @@ function get_jobs_site_admin()
 
     while ($row = fetch_array($query)) {
 
-        $user_admin_job = <<<DELIMETER
+        $admin_all_job = <<<DELIMETER
 
 <tr>
     <td>{$row['id']}</td>
@@ -827,12 +885,12 @@ function get_jobs_site_admin()
     <td>{$row['location']}</td>
     <td>{$row['created_at']}</td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block">
-            <a href="job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
+        <div class="header-btn d-none d-lg-block">
+            <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
-        <div class="header-btn d-none f-right d-lg-block job_delete">
+        <div class="header-btn d-none d-lg-block job_delete">
             <a href="delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
@@ -840,9 +898,14 @@ function get_jobs_site_admin()
 
 DELIMETER;
 
-        echo $user_admin_job;
+        echo $admin_all_job;
     }
 }
+
+
+
+
+
 
 
 
@@ -901,6 +964,121 @@ function get_featured_jobs()
         DELIMETER;
 
             echo $featured_job;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function get_all_companies()
+{
+
+
+    $query = query("SELECT * FROM users WHERE type = 1 ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $company_id = $row['user_id'];
+
+        $admin_all_companies = <<<DELIMETER
+
+<tr>
+    <td>
+        <img width="100" src="../images/{$row['image']}" alt="">
+    </td>
+    <td>{$row['username']}</td>
+    <td>{$row['email']}</td>
+    <td>{$row['description']}</td>
+    <td>{$row['capacity']}</td>
+    <td>{$row['location']}</td>
+    <td>{$row['status']}</td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block">
+            <a href="../company_details.php?id={$company_id}" class="btn border-btn head-btn1">View</a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block company_delete">
+            <a href="delete_company.php?id={$company_id}" class="btn border-btn head-btn1">Delete</a>
+        </div>
+    </td>
+</tr>
+
+DELIMETER;
+
+        echo $admin_all_companies;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+function get_all_candidates()
+{
+
+
+    $query = query("SELECT * FROM users WHERE type = 0 ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $candidate_id = $row['user_id'];
+        $candidate_name = $row['username'];
+        $candidate_email = $row['email'];
+        $candidate_status = $row['status'];
+
+
+
+        $candidate_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
+        confirm($candidate_query);
+
+
+        while ($row = fetch_array($candidate_query)) {
+
+
+
+            $admin_all_candidates = <<<DELIMETER
+
+<tr>
+    <td>
+        <img width="100" src="../images/{$row['image']}" alt="">
+    </td>
+    <td>{$candidate_name}</td>
+    <td>{$candidate_email}</td>
+    <td>{$row['description']}</td>
+    <td>{$candidate_status}</td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block">
+            <a href="../candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none f-right d-lg-block candidate_delete">
+            <a href="delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
+        </div>
+    </td>
+</tr>
+
+DELIMETER;
+
+            echo $admin_all_candidates;
         }
     }
 }
@@ -1059,6 +1237,84 @@ function view_button_job_details()
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+function job_detail_page_link()
+{
+
+    if (IsLoggedIn()) {
+
+        $usertype = $_SESSION['type'];
+    }
+
+
+    if (isset($_GET['id'])) {
+
+        $user_query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
+        confirm($user_query);
+
+        while ($row = fetch_array($user_query)) {
+            $candidate_id = $row['user_id'];
+            $candidate_name = $row['username'];
+
+
+            $query = query("SELECT cv FROM candidate WHERE name = '{$candidate_name}' ");
+            confirm($query);
+
+            while ($row = fetch_array($query)) {
+
+                $candidate_cv = $row['cv'];
+            }
+
+
+            if ($usertype == 1) {
+
+                $company_link = <<<DELIMETER
+
+                    <div class="candidate-details">
+                        <a href="candidate_cv/$candidate_cv"><button name="candidate_details" type="submit" class="btn head-btn1">View CV</button></a>
+                    </div>
+                    <br>
+                    <div class="send-accept">
+                        <a href="accept_application.php?id=$candidate_id"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
+                    </div>
+                    <br>
+                    <div class="send-reject">
+                        <a href="reject_application.php?id=$candidate_id"><button name="reject_application" type="reject-application" class="btn head-btn1">Reject Application !</button></a>
+                    </div>
+                    <br>
+                    <div class="send-message">
+                        <a href="candidate_message.php?id=$candidate_id"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate !</button></a>
+                    </div>
+
+                DELIMETER;
+                echo $company_link;
+            } elseif ($usertype == 2) {
+
+                $admin_link = <<<DELIMETER
+
+                    <div class="candidate-details">
+                        <a href="candidate_cv/$candidate_cv"><button name="candidate_details" type="submit" class="btn head-btn1">View CV</button></a>
+                    </div>
+                    <br>
+                    <div class="send-message">
+                        <a href="candidate_message.php?id=$candidate_id"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate !</button></a>
+                    </div>
+
+                DELIMETER;
+                echo $admin_link;
+            }
+        }
+    }
+}
 
 
 

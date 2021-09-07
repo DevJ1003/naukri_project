@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fas fa-address-card" style="font-size: 200px;"></i> Candidate's Details Page...!!</h2>
+                        <h2><i class="fas fa-address-card" style="font-size: 240px;"></i> Candidate's Details Page...!!</h2>
                     </div>
                 </div>
             </div>
@@ -136,21 +136,8 @@ if (isset($_GET['id'])) {
                                 and i also know <?php echo $candidate_skills; ?> , I have a experience of about <?php echo $candidate_experience; ?> .
                                 Please find my Resume attached under .</span></li>
                     </ul>
-                    <div class="candidate-details">
-                        <a href="candidate_cv/<?php echo $candidate_cv; ?>"><button name="company_details" type="submit" class="btn head-btn1">View CV</button></a>
-                    </div>
-                    <br>
-                    <div class="send-accept">
-                        <a href="accept_application.php?id=<?php echo $candidate_id; ?>"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
-                    </div>
-                    <br>
-                    <div class="send-reject">
-                        <a href="reject_application.php?id=<?php echo $candidate_id; ?>"><button name="reject_application" type="reject-application" class="btn head-btn1">Reject Application !</button></a>
-                    </div>
-                    <br>
-                    <div class="send-message">
-                        <a href="candidate_message.php?id=<?php echo $candidate_id; ?>"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate !</button></a>
-                    </div>
+
+                    <?php job_detail_page_link(); ?>
 
                 </div>
             </div>

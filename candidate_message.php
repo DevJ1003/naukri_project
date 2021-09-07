@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="far fa-paper-plane" style="font-size:120px;"></i> Message Candidate...!!</h2>
+                        <h2><i class="far fa-paper-plane" style="font-size:240px;"></i> Message Candidate...!!</h2>
                     </div>
                 </div>
             </div>

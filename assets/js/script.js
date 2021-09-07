@@ -13,12 +13,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
     $(".job_apply").click(function () {
 
         var user_input;
@@ -40,6 +34,28 @@ $(document).ready(function () {
     });
 
 
+
+
+    $(".company_delete").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to delete this company ?");
+
+    });
+
+
+
+
+    $(".candidate_delete").click(function () {
+
+        var user_input;
+
+        location.reload();
+        return user_input = confirm("Do you want to delete this candidate ?");
+
+    });
 
 
 

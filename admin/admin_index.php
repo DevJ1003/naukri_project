@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2>Hi , welcome to nAukri.com's site admin page !</h2>
+                        <h2><i class="fas fa-user" style="font-size:100px;"></i> nAukri.com all data...!!</h2>
                     </div>
                 </div>
             </div>
@@ -19,31 +19,46 @@
 <!-- Hero Area End -->
 
 <div class="container">
-    <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
-        Jobs posted by all companies...!!
-    </h1>
-    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
     <br>
 
-    <table class="table" style="min-height: 400px;">
 
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Company</th>
-                <th>Description</th>
-                <th>(&#8377;)Salary</th>
-                <th>Location</th>
-                <th>Posted At</th>
-                <th>View Job</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php get_jobs_site_admin(); ?>
-        </tbody>
-    </table>
+    <!-- Right Content -->
+    <div class="col-xl-12 col-lg-2">
+        <div class="post-details3  mb-10">
+            <!-- Small Section Tittle -->
+            <div class="small-section-tittle">
+                <h4 class="text-center"><i class="far fa-list-alt" style="font-size: 40px;"></i> ALL DATA...!!</h4>
+            </div>
+            <hr>
+            <ul>
+                <li>
+                    TOTAL JOBS POSTED ====================================================> <?php count_jobs(); ?> Jobs !<div class="text-center">
+                        <div class="header-btn d-none f-center d-lg-block">
+                            <p><a href="admin_jobs.php" class="btn border-btn head-btn1">View All Jobs !</a></p>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+                <li>
+                    TOTAL COMPANIES REGISTERED ===========================================> <?php count_companies(); ?> Companies !<div class="text-center">
+                        <div class="header-btn d-none f-center d-lg-block">
+                            <p><a href="admin_companies.php" class="btn border-btn head-btn1">View All Companies !</a></p>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+                <li>
+                    TOTAL CANDIDATES REGISTERED ==========================================> <?php count_candidates(); ?> Candidates !<div class="text-center">
+                        <div class="header-btn d-none f-center d-lg-block">
+                            <p><a href="admin_candidates.php" class="btn border-btn head-btn1">View All Candidates !</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
 </div>
 <br>
 

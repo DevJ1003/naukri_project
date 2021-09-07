@@ -1,6 +1,7 @@
 <?php include "includes/header.php"; ?>
 
-<h1 class="text-center" style="text-align: center;">REGISTRATION</h1>
+<h3 class="text-center"><i class="fa fa-user-plus" style="font-size: 120px;"></i></h3>
+<h1 class="text-center">REGISTRATION</h1>
 
 <!-- login form starts -->
 <form class="text-center" style="text-align: center;" method="post" enctype="multipart/form-data">

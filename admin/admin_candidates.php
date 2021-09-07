@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center">
-                        <h2><i class="fas fa-user" style="font-size: 100px;"></i> Welcome to <?php echo $_SESSION['username'] ?>'s Admin page !</h2>
+                        <h2><i class="fas fa-address-card" style="font-size:240px;"></i> All Candidates...!!</h2>
                     </div>
                 </div>
             </div>
@@ -19,27 +19,24 @@
 <!-- Hero Area End -->
 
 <div class="container">
-    <h1 class="page-header text-center"><i class="fa fa-fw fa-table"></i>
-        Your Applied Jobs...!!
-    </h1>
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
-    <table class="table" style="min-height: 400px;">
-
+    <!-- TABLE DATA -->
+    <table class="table" style="min-height: 500px;">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Image</th>
                 <th>Name</th>
-                <th>Company</th>
+                <th>Email</th>
                 <th>Description</th>
-                <th>(&#8377;)Salary</th>
-                <th>Location</th>
-                <th>Posted At</th>
-                <th>Actions</th>
+                <th>Status</th>
+                <th>View Candidate</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <?php get_jobs_candidate_admin(); ?>
+            <?php get_all_candidates();
+            ?>
         </tbody>
     </table>
 </div>
