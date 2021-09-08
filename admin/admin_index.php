@@ -1,6 +1,5 @@
 <?php include "includes/admin_header.php"; ?>
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
@@ -20,7 +19,6 @@
 
 <div class="container">
     <br>
-
 
     <!-- Right Content -->
     <div class="col-xl-12 col-lg-2">
@@ -57,7 +55,6 @@
             </ul>
         </div>
     </div>
-
 
 </div>
 <br>

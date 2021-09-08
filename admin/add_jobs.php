@@ -1,6 +1,5 @@
 <?php include "includes/admin_header.php"; ?>
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
@@ -19,8 +18,6 @@
 <!-- Hero Area End -->
 
 
-
-
 <div id="page-wrapper" style="text-align: -webkit-center;">
 
     <h1 class="page-header"><i class="fa fa-fw fa-table"></i>
@@ -28,7 +25,6 @@
     </h1>
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
     <hr>
-
 
     <form action="" method="post" enctype="multipart/form-data">
         <?php add_jobs();
@@ -93,9 +89,7 @@
 
         <!--Main Content-->
 
-
     </form>
-
 </div>
 <!-- /#page-wrapper -->
 <br>

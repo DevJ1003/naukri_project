@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* GET CANDIDATE DETAILS QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
@@ -10,7 +12,6 @@ if (isset($_GET['id'])) {
         $candidate_id = escape_string($row['user_id']);
         $candidate_name = escape_string($row['username']);
     }
-
 
     $details_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
     confirm($details_query);
@@ -72,6 +73,7 @@ if (isset($_GET['id'])) {
                 <!-- job single End -->
 
                 <div class="job-post-details">
+
                     <div class=" post-details mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
@@ -80,8 +82,6 @@ if (isset($_GET['id'])) {
                         <p><?php echo $candidate_description; ?></p>
                     </div>
                 </div>
-
-
 
                 <div class="post-details  mb-50">
                     <!-- Small Section Tittle -->
@@ -92,7 +92,6 @@ if (isset($_GET['id'])) {
                         <?php echo $candidate_knowledge; ?>
                     </ul>
                 </div>
-
 
                 <div class="post-details  mb-50">
                     <!-- Small Section Tittle -->
@@ -117,12 +116,6 @@ if (isset($_GET['id'])) {
             </div>
 
 
-
-
-
-
-
-
             <!-- Right Content -->
             <div class="col-xl-4 col-lg-4">
                 <div class="post-details3  mb-50">
@@ -145,7 +138,6 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!-- job post company End -->
-
 </main>
 
 <?php include "includes/footer_short.php"; ?>

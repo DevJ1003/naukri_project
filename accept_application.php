@@ -2,7 +2,7 @@
 
 include "includes/functions.php";
 
-
+/* ACCEPT JOB APPLICATION QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM applications WHERE user_id =" .  escape_string($_GET['id']));

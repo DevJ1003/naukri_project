@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* COMPANIES PROFILE DATA QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM users WHERE user_id =" . ($_GET['id']) . " ");
@@ -18,7 +20,6 @@ if (isset($_GET['id'])) {
 ?>
 
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -35,7 +36,6 @@ if (isset($_GET['id'])) {
 </div>
 <br>
 <!-- Hero Area End -->
-
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
     <br>

@@ -18,7 +18,7 @@
             <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" class="form-control" placeholder="Enter your Password" required data-validation-required-message="Please enter Password"></label>
     </div>
 
-
+    <!-- image upload here -->
     <div class="form-group">
         <label for="image">User Image</label>
         <input type="file" name="file">

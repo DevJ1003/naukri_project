@@ -18,26 +18,15 @@
     </div>
     <!-- Hero Area End -->
 
-
-
-
-
-
-
-
-
-
     <!-- Job List Area Start -->
     <div class="job-listing-area pt-120 pb-120">
         <div class="container">
             <div class="row">
-
                 <!-- Right content -->
                 <div class="col-xl-9 col-lg-9 col-md-8">
                     <!-- Featured_job_start -->
                     <section class="featured-job-area">
                         <div class="container">
-
 
                             <!-- Count of Job list Start -->
                             <div class="row">
@@ -48,7 +37,6 @@
                             <!-- Count of Job list End -->
 
                             <table class="table table-hover">
-
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -62,9 +50,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php get_jobs(); ?>
-
                                 </tbody>
                             </table>
                         </div>
@@ -75,7 +61,6 @@
         </div>
     </div>
     <!-- Job List Area End -->
-
 </main>
 
 <?php include "includes/footer.php"; ?>

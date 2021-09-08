@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* GET JOB DETAILS QUERY */
 if (isset($_GET['id'])) {
 
     $jobs_data_query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));

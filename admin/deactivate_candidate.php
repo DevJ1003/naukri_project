@@ -3,6 +3,7 @@
 include "../includes/functions.php";
 
 
+/* DEACTIVATE CANDIDATE QUERY */
 if (isset($_GET['id'])) {
 
     $deactivate_query = "UPDATE users SET status = '1' ";

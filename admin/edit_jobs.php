@@ -1,5 +1,7 @@
 <?php include "includes/admin_header.php";
 
+
+/* GET JOB DATA-UPDATING JOB DATA QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
@@ -16,7 +18,6 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-
 
 
 <!-- Hero Area Start-->
@@ -39,12 +40,7 @@ if (isset($_GET['id'])) {
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
 
-    <!-- <h1 class="page-header"><i class="fa fa-fw fa-table"></i>
-        Edit Job...!!
-    </h1> -->
-
     <form action="" method="post" enctype="multipart/form-data">
-
         <div class="col-md-6">
             <div class="form-group">
                 <label for="job-title">TITLE</label>

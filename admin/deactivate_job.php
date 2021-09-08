@@ -3,6 +3,7 @@
 include "../includes/functions.php";
 
 
+/* DEACTIVATE JOB QUERY */
 if (isset($_GET['id'])) {
 
     $deactivate_query = "UPDATE jobs SET status = '1' ";

@@ -17,7 +17,7 @@
 <br>
 <!-- Hero Area End -->
 
-<!-- ================ contact section start ================= -->
+<!-- ================ CONTACT SECTION START ================= -->
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -66,7 +66,6 @@
             </form>
         </div>
 
-
         <!-- SIDEBAR DISPLAY ITEMS -->
         <div class="col-lg-3 offset-lg-1">
 
@@ -78,7 +77,6 @@
                 </div>
             </div>
 
-
             <div class="media contact-info">
                 <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                 <div class="media-body">
@@ -86,7 +84,6 @@
                     <p>Mon to Fri <br> 9:00 AM to 6:00 PM</p>
                 </div>
             </div>
-
 
             <div class="media contact-info">
                 <span class="contact-info__icon"><i class="ti-email"></i></span>
@@ -99,6 +96,6 @@
         </div>
     </div>
 </div>
-<!-- ================ contact section end ================= -->
+<!-- ================ CONTACT SECTION END ================= -->
 
 <?php include "includes/footer.php"; ?>

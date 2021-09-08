@@ -11,7 +11,6 @@
     <form role="form" class="form" method="post">
         <!--autocomplete="off" in form-->
 
-
         <?php login_user(); ?>
 
         <div class="form-group">
@@ -32,8 +31,10 @@
 
     </form>
 
-    <div class="form-group">
-        <a href="forgot.php">Forgot Password ?</a>
+    <div class="text-center">
+        <div class="header-btn d-none f-center d-lg-block">
+            <p><a href="forgot.php" class="btn border-btn head-btn1">Forgot Password ?</a></p>
+        </div>
     </div>
 
 </div>

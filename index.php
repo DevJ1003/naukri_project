@@ -16,14 +16,7 @@
                         </div>
                     </div>
 
-
-
-
-
                     <?php login_find_add_job_link(); ?>
-
-
-
 
                 </div>
             </div>
@@ -31,16 +24,13 @@
     </div>
     <!-- slider Area End-->
 
-
     <?php include "navigation/categories.php";
 
     include "navigation/featured_job.php";
 
-    include "navigation/bottom_navigation.php";
+    include "navigation/bottom_navigation.php"; ?>
 
-    ?>
-
-
+    <!-- main tag end -->
 </main>
 
 <?php include "includes/footer.php"; ?>

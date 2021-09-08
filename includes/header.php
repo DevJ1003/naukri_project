@@ -1,8 +1,6 @@
 <?php include "db.php";
 
-include "functions.php";
-
-?>
+include "functions.php"; ?>
 
 
 <!doctype html>

@@ -159,7 +159,6 @@
 
 <!-- CUSTOM JS CODE HERE -->
 <script src="./assets/js/script.js"></script>
-
 </body>
 
 </html>

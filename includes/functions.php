@@ -1,6 +1,6 @@
 <?php
 
-/*********************************************** Helper Functions *************************************/
+/*********************************************** HELPER FUNCTIONS *************************************/
 
 
 function set_message($msg)
@@ -112,7 +112,7 @@ function get_user_id()
 
 
 
-/***************************************** END Helper Functions ******************************************/
+/***************************************** END HELPER FUNCTIONS ******************************************/
 
 
 
@@ -136,6 +136,9 @@ function register_user()
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
+
         $user_type = $_POST['user_type'];
 
         $image = $_FILES['file']['name'];
@@ -144,7 +147,7 @@ function register_user()
         move_uploaded_file($temp_image, "images/$image");
 
 
-        $generated_query = "INSERT INTO users(username, password , type , email , image) VALUES('{$username}'  , '{$password}' , '{$user_type}' , '{$email}', '{$image}') ";
+        $generated_query = "INSERT INTO users(username, password , type , email , image) VALUES('{$username}'  , '{$hashed_password}' , '{$user_type}' , '{$email}', '{$image}') ";
         $query = query($generated_query);
         confirm($query);
 
@@ -167,38 +170,45 @@ function register_user()
 function login_user()
 {
 
+    global $connection;
+
     if (isset($_POST['submit'])) {
 
-        $username = escape_string($_POST['username']);
-        $password = escape_string($_POST['password']);
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-        $login_query = "SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' ";
+
+        $username = mysqli_real_escape_string($connection, $username);
+        $password = mysqli_real_escape_string($connection, $password);
+
+
+        $login_query = "SELECT * FROM users WHERE username = '{$username}'";
         $query = query($login_query);
         confirm($query);
 
         while ($row = mysqli_fetch_array($query)) {
 
-            $userid   = $row['user_id'];
-            $username = $row['username'];
-            $password = $row['password'];
-            $usertype = $row['type'];
-            $status = $row['status'];
+            $db_userid   = $row['user_id'];
+            $db_username = $row['username'];
+            $db_password = $row['password'];
+            $db_usertype = $row['type'];
+            $db_status = $row['status'];
 
 
-            if ($usertype == 0 && $status == 0) {
+            if ($db_usertype == 0 && $db_status == 0 && $db_password == $password) {
 
                 if (mysqli_num_rows($query) == 0) {
 
                     set_message("Your Username or Password is wrong !");
                     redirect("login.php");
                 } else {
-                    $_SESSION['user_id']  = $userid;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['password'] = $password;
-                    $_SESSION['type']     = $usertype;
+                    $_SESSION['user_id']  = $db_userid;
+                    $_SESSION['username'] = $db_username;
+                    $_SESSION['password'] = $db_password;
+                    $_SESSION['type']     = $db_usertype;
                     redirect("admin/candidate_index.php");
                 }
-            } elseif ($usertype == 1 && $status == 0) {
+            } elseif ($db_usertype == 1 && $db_status == 0 && $db_password == $password) {
 
                 if (mysqli_num_rows($query) == 0) {
 
@@ -206,13 +216,13 @@ function login_user()
                     redirect("login.php");
                 } else {
 
-                    $_SESSION['user_id']  = $userid;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['password'] = $password;
-                    $_SESSION['type']     = $usertype;
+                    $_SESSION['user_id']  = $db_userid;
+                    $_SESSION['username'] = $db_username;
+                    $_SESSION['password'] = $db_password;
+                    $_SESSION['type']     = $db_usertype;
                     redirect("admin/company_index.php");
                 }
-            } elseif ($usertype == 2 && $status == 0) {
+            } elseif ($db_usertype == 2 && $db_status == 0 && $db_password == $password) {
 
                 if (mysqli_num_rows($query) == 0) {
 
@@ -220,10 +230,10 @@ function login_user()
                     redirect("login.php");
                 } else {
 
-                    $_SESSION['user_id']  = $userid;
-                    $_SESSION['username'] = $username;
-                    $_SESSION['password'] = $password;
-                    $_SESSION['type']     = $usertype;
+                    $_SESSION['user_id']  = $db_userid;
+                    $_SESSION['username'] = $db_username;
+                    $_SESSION['password'] = $db_password;
+                    $_SESSION['type']     = $db_usertype;
                     redirect("admin/admin_index.php");
                 }
             }
@@ -743,7 +753,7 @@ function send_message()
 
 
 
-
+/********************************************* END MESSAGE FUCNTION ******************************************/
 
 
 
@@ -1370,6 +1380,11 @@ function job_detail_page_link()
 
 
 
+
+
+
+
+
 /******************************************** ADMIN DATA FUCNTIONS *****************************/
 
 
@@ -1939,41 +1954,6 @@ DELIMETER;
     }
 }
 
-
-
-
-
-
-
-
-
-
-// function jobs_data_admin()
-// {
-
-
-//     if (isset($_GET['id'])) {
-
-//         $query = query("SELECT * FROM jobs WHERE id =" . escape_string($_GET['id']));
-//         confirm($query);
-
-//         while ($row = fetch_array($query)) {
-
-//             $company_name = $_SESSION['username'];
-//             $title       = escape_string($row['title']);
-//             $description = escape_string($row['description']);
-//             $vacancy     = escape_string($row['vacancy']);
-//             $nature      = escape_string($row['nature']);
-//             $knowledge   = escape_string($row['knowledge']);
-//             $skills      = escape_string($row['skills']);
-//             $education   = escape_string($row['education']);
-//             $experience  = escape_string($row['experience']);
-//             $salary      = escape_string($row['salary']);
-//             $location    = escape_string($row['location']);
-//             $posted_on   = escape_string($row['created_at']);
-//         }
-//     }
-// }
 
 
 

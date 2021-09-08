@@ -1,6 +1,5 @@
 <?php include "includes/header.php"; ?>
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -20,11 +19,8 @@
 
 <div class="container">
 
-
     <!-- TABLE -->
-    <table class="table">
-        <!-- <table class="table" style="min-height: 400px;"> -->
-
+    <table class="table" style="min-height: 400px;">
         <thead>
             <tr>
                 <!-- <th>Id</th> -->

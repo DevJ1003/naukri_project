@@ -1,5 +1,6 @@
 <?php
 
+/* LOGOUT USER */
 session_start();
 session_destroy();
 

@@ -2,7 +2,7 @@
 
 include "includes/functions.php";
 
-
+/* RETRIEVE JOB-INTEREST QUERY */
 if (isset($_GET['id'])) {
 
 

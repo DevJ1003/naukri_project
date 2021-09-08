@@ -3,6 +3,7 @@
 include "../includes/functions.php";
 
 
+/* ACTIVATE JOB QUERY */
 if (isset($_GET['id'])) {
 
     $activate_query = "UPDATE jobs SET status = '0' ";

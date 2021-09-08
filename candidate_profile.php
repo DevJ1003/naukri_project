@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* GET CANDIDATE DATA - UPDATING CANDIDATE PROFILE QUERY */
 if (isset($_SESSION['username'])) {
 
     $username = $_SESSION['username'];
@@ -21,8 +23,6 @@ if (isset($_SESSION['username'])) {
 
 ?>
 
-
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -39,7 +39,6 @@ if (isset($_SESSION['username'])) {
 </div>
 <br>
 <!-- Hero Area End -->
-
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
 
@@ -84,7 +83,6 @@ if (isset($_SESSION['username'])) {
                 <label for="candidate-experience">EXPERIENCE</label>
                 <input type="text" name="candidate_experience" class="form-control" value="<?php echo $experience; ?>">
             </div>
-
 
             <hr>
             <div class="form-group">

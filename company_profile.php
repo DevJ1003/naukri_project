@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* GET COMPANY DATA - UPDATING COMPANY PROFILE QUERY */
 if (isset($_SESSION['username'])) {
 
     $username = $_SESSION['username'];
@@ -19,8 +21,6 @@ if (isset($_SESSION['username'])) {
 
 ?>
 
-
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -37,7 +37,6 @@ if (isset($_SESSION['username'])) {
 </div>
 <br>
 <!-- Hero Area End -->
-
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
     <br>

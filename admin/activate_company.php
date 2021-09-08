@@ -3,6 +3,7 @@
 include "../includes/functions.php";
 
 
+/* ACTIVATE COMPANY QUERY */
 if (isset($_GET['id'])) {
 
     $activate_query = "UPDATE users SET status = '0' ";

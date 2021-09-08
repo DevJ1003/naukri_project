@@ -1,20 +1,16 @@
 <?php include "includes/header.php";
 
+
+/* CANDIDATES PROFILE DATA QUERY */
 if (isset($_GET['id'])) {
-
-
-
 
     $username_query = query("SELECT * FROM users WHERE user_id =" . ($_GET['id']) . " ");
     confirm($username_query);
 
 
-
     while ($row = fetch_array($username_query)) {
 
         $candidate_name = $row['username'];
-
-
 
         $query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
         confirm($query);
@@ -35,7 +31,6 @@ if (isset($_GET['id'])) {
 ?>
 
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -52,7 +47,6 @@ if (isset($_GET['id'])) {
 </div>
 <br>
 <!-- Hero Area End -->
-
 
 <div id="page-wrapper" style="text-align: -webkit-center;">
 
@@ -97,7 +91,6 @@ if (isset($_GET['id'])) {
                 <label for="candidate-experience">EXPERIENCE</label>
                 <input type="text" name="candidate_experience" class="form-control" value="<?php echo $experience; ?>">
             </div>
-
 
             <hr>
             <div class="form-group">

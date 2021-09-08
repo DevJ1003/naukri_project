@@ -48,7 +48,6 @@
         </div>
     </div>
     <!-- Support Company End-->
-
 </main>
 
 <?php include "includes/footer.php"; ?>

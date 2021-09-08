@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* GET COMPANY DETAILS QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
@@ -19,7 +21,6 @@ if (isset($_GET['id'])) {
 
 ?>
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
@@ -37,9 +38,7 @@ if (isset($_GET['id'])) {
 <br>
 <!-- Hero Area End -->
 
-
 <?php display_message(); ?>
-
 
 <!-- job post company Start -->
 <div class="job-post-company pt-120 pb-120">
@@ -74,8 +73,6 @@ if (isset($_GET['id'])) {
                     </div>
                 </div>
 
-
-
                 <div class="post-details2  mb-50">
                     <!-- Small Section Tittle -->
                     <div class="small-section-tittle">
@@ -86,12 +83,6 @@ if (isset($_GET['id'])) {
                     </ul>
                 </div>
             </div>
-
-
-
-
-
-
 
 
             <!-- Right Content -->
@@ -113,7 +104,6 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <!-- job post company End -->
-
 </main>
 
 <?php include "includes/footer_short.php"; ?>

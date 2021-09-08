@@ -1,6 +1,5 @@
 <?php include "includes/admin_header.php"; ?>
 
-
 <!-- Hero Area Start-->
 <div class="slider-area ">
     <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
@@ -25,7 +24,6 @@
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
     <table class="table" style="min-height: 400px;">
-
         <thead>
             <tr>
                 <th>Id</th>

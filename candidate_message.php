@@ -1,5 +1,7 @@
 <?php include "includes/header.php";
 
+
+/* MESSAGE CANDIDATE QUERY */
 if (isset($_GET['id'])) {
 
     $query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
@@ -10,7 +12,6 @@ if (isset($_GET['id'])) {
         $candidate_id = escape_string($row['user_id']);
         $candidate_name = escape_string($row['username']);
     }
-
 
     $details_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
     confirm($details_query);
@@ -46,7 +47,7 @@ if (isset($_GET['id'])) {
 <br>
 <!-- Hero Area End -->
 
-<!-- ================ contact section start ================= -->
+<!-- ================ CONTACT SECTION START ================= -->
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -98,6 +99,6 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 <br>
-<!-- ================ contact section end ================= -->
+<!-- ================ CONTACT SECTION END ================= -->
 
 <?php include "includes/footer_short.php"; ?>
