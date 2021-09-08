@@ -11,5 +11,5 @@ if (isset($_GET['id'])) {
     confirm($query);
 
     set_message("You Deactivated This Candidate Account !");
-    redirect("admin_candidates.php");
+    redirect("../admin_candidates.php");
 }

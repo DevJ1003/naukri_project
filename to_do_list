@@ -17,8 +17,8 @@ Admin View :
 4. view all candidate's dashboard =========================================yes
 5. Activate/Deactivate company account ======================================yes
 6. Activate/Deactivate candidate account ====================================yes
-7. Update company account details
-8. Update candidate account details
+7. Update company account details ============================================yes
+8. Update candidate account details =============================yes
 
 Client/Company view
 1. Post jobs - job create, edit, delete, view ======================================yes

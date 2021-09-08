@@ -1,0 +1,80 @@
+<?php include "includes/header.php";
+
+if (isset($_GET['id'])) {
+
+    $query = query("SELECT * FROM users WHERE user_id =" . ($_GET['id']) . " ");
+    confirm($query);
+
+    while ($row = fetch_array($query)) {
+
+        $username    = $row['username'];
+        $description = $row['description'];
+        $capacity    = $row['capacity'];
+        $location    = $row['location'];
+        $image       = $row['image'];
+    }
+}
+
+?>
+
+
+
+<!-- Hero Area Start-->
+<div class="slider-area ">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2><i class="far fa-address-book" style="font-size:240px;"></i> Update <?php echo $username; ?>'s Profile...!!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- Hero Area End -->
+
+
+<div id="page-wrapper" style="text-align: -webkit-center;">
+    <br>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <?php update_profile_company_admin(); ?>
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label for="job-description">DESCRIPTION</label>
+                <textarea type="text" name="company_description" id="" cols="30" rows="10" class="form-control"><?php echo $description; ?></textarea>
+            </div>
+
+            <div class=" form-group">
+                <label for="job-salary">EMPLOYEES</label>
+                <input type="text" name="company_employees" class="form-control" value="<?php echo $capacity; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="image">IMAGE</label>
+                <input type="file" name="file"><br>
+                <img width="100" src="images/<?php echo $image; ?>" alt="">
+            </div>
+
+            <div class="form-group">
+                <label for="job-location">ADDRESS</label>
+                <input type="text" name="company_location" class="form-control" value="<?php echo $location; ?>"></input>
+            </div>
+
+            <div class="form-group">
+                <button name="update" type="submit" class="btn head-btn2">Update Company profile !<span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+
+        </div>
+        <!--Main Content-->
+    </form>
+</div>
+<!-- /#page-wrapper -->
+<br>
+
+<?php include "includes/footer_short.php"; ?>

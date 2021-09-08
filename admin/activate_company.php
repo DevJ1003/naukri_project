@@ -11,5 +11,5 @@ if (isset($_GET['id'])) {
     confirm($query);
 
     set_message("You Activated This Company Account !");
-    redirect("admin_companies.php");
+    redirect("../admin_companies.php");
 }

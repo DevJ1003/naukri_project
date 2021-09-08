@@ -11,5 +11,5 @@ if (isset($_GET['id'])) {
     confirm($query);
 
     set_message("You Deactivated This Job !");
-    redirect("admin_jobs.php");
+    redirect("../admin_jobs.php");
 }

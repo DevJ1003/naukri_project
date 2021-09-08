@@ -296,9 +296,9 @@ function admin_link_user_type_home()
 
             $admin = <<<DELIMETER
                 <li><a href="admin/admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
-                <li><a href="admin/admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
-                <li><a href="admin/admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
-                <li><a href="admin/admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
+                <li><a href="admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
+                <li><a href="admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
             DELIMETER;
             echo $admin;
         }
@@ -357,9 +357,9 @@ function admin_link_user_type_admin()
             $admin = <<<DELIMETER
 
                 <li><a href="admin_index.php"><i class="fas fa-user"></i> Admin</a></li>
-                <li><a href="admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
-                <li><a href="admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
-                <li><a href="admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
+                <li><a href="../admin_jobs.php"><i class="fas fa-briefcase"></i> Jobs</a></li>
+                <li><a href="../admin_companies.php"><i class="fas fa-building"></i> Companies</a></li>
+                <li><a href="../admin_candidates.php"><i class="fas fa-address-card"></i> Candidates</a></li>
 
             DELIMETER;
             echo $admin;
@@ -884,21 +884,21 @@ function get_jobs_site_admin()
     <td>{$row['company_name']}</td>
     <td>
         <div class="send-activate activate_job">
-            <a href="activate_job.php?id={$row['id']}"><button name="activate_job" type="activate-job" class="btn head-btn1">Activate !</button></a>
+            <a href="admin/activate_job.php?id={$row['id']}"><button name="activate_job" type="activate-job" class="btn head-btn1">Activate !</button></a>
         </div>
         <br>
         <div class="send-deactivate deactivate_job">
-            <a href="deactivate_job.php?id={$row['id']}"><button name="deactivate_job" type="deactivate-job" class="btn head-btn1">Deactivate !</button></a>
+            <a href="admin/deactivate_job.php?id={$row['id']}"><button name="deactivate_job" type="deactivate-job" class="btn head-btn1">Deactivate !</button></a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block">
-            <a href="../job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
+            <a href="job_details.php?id={$row['id']}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block job_delete">
-            <a href="admin_delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
+            <a href="admin/admin_delete_jobs.php?id={$row['id']}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
 </tr>
@@ -1002,28 +1002,33 @@ function get_all_companies()
 
 <tr>
     <td>
-        <img width="100" src="../images/{$row['image']}" alt="">
+        <img width="100" src="images/{$row['image']}" alt="">
     </td>
     <td>{$row['username']}</td>
     <td>{$row['email']}</td>
     <td>{$row['description']}</td>
     <td>
         <div class="send-activate activate_company">
-            <a href="activate_company.php?id={$company_id}"><button name="activate_company" type="activate-company" class="btn head-btn1">Activate !</button></a>
+            <a href="admin/activate_company.php?id={$company_id}"><button name="activate_company" type="activate-company" class="btn head-btn1">Activate !</button></a>
         </div>
         <br>
         <div class="send-deactivate deactivate_company">
-            <a href="deactivate_company.php?id={$company_id}"><button name="deactivate_company" type="deactivate-company" class="btn head-btn1">Deactivate !</button></a>
+            <a href="admin/deactivate_company.php?id={$company_id}"><button name="deactivate_company" type="deactivate-company" class="btn head-btn1">Deactivate !</button></a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block">
-            <a href="../company_details.php?id={$company_id}" class="btn border-btn head-btn1">View</a>
+            <a href="admin_company_profile.php?id={$company_id}" class="btn border-btn head-btn1">Update</a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none d-lg-block">
+            <a href="company_details.php?id={$company_id}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block company_delete">
-            <a href="delete_company.php?id={$company_id}" class="btn border-btn head-btn1">Delete</a>
+            <a href="admin/delete_company.php?id={$company_id}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
 </tr>
@@ -1071,28 +1076,33 @@ function get_all_candidates()
 
 <tr>
     <td>
-        <img width="100" src="../images/{$row['image']}" alt="">
+        <img width="100" src="images/{$row['image']}" alt="">
     </td>
     <td>{$candidate_name}</td>
     <td>{$candidate_email}</td>
     <td>{$row['description']}</td>
     <td>
         <div class="send-activate activate_candidate">
-            <a href="activate_candidate.php?id={$candidate_id}"><button name="activate_candidate" type="activate-candidate" class="btn head-btn1">Activate !</button></a>
+            <a href="admin/activate_candidate.php?id={$candidate_id}"><button name="activate_candidate" type="activate-candidate" class="btn head-btn1">Activate !</button></a>
         </div>
         <br>
         <div class="send-deactivate deactivate_candidate">
-            <a href="deactivate_candidate.php?id={$candidate_id}"><button name="deactivate_candidate" type="deactivate-candidate" class="btn head-btn1">Deactivate !</button></a>
+            <a href="admin/deactivate_candidate.php?id={$candidate_id}"><button name="deactivate_candidate" type="deactivate-candidate" class="btn head-btn1">Deactivate !</button></a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block">
-            <a href="../candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
+            <a href="admin_candidate_profile.php?id={$candidate_id}" class="btn border-btn head-btn1">Update</a>
+        </div>
+    </td>
+    <td>
+        <div class="header-btn d-none d-lg-block">
+            <a href="candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
         </div>
     </td>
     <td>
         <div class="header-btn d-none d-lg-block candidate_delete">
-            <a href="delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
+            <a href="admin/delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
         </div>
     </td>
 </tr>
@@ -1486,6 +1496,58 @@ function update_profile_company()
 
 
 
+
+function update_profile_company_admin()
+{
+
+
+    if (isset($_POST['update'])) {
+
+        $company_id = $_GET['id'];
+
+        $image        = $_FILES['file']['name'];
+        $temp_image   = $_FILES['file']['tmp_name'];
+
+        $description = $_POST['company_description'];
+        $capacity    = $_POST['company_employees'];
+        $location    = $_POST['company_location'];
+
+        move_uploaded_file($temp_image, "images/$image");
+
+
+        if (empty($image)) {
+
+            $query = query("SELECT * FROM users WHERE user_id = '{$company_id}' ");
+            while ($row = fetch_array($query)) {
+                $image = $row['image'];
+            }
+        }
+
+        $query = query("SELECT * FROM users WHERE user_id = '{$company_id}' ");
+        while ($row = fetch_array($query)) {
+            $company_name = $row['username'];
+        }
+
+        $query = "UPDATE users SET description = '{$description}' , capacity = '{$capacity}' , image = '{$image}' , location = '{$location}' ";
+        $query .= "WHERE username = '{$company_name}' ";
+        $update_profile_query = query($query);
+        confirm($update_profile_query);
+
+        set_message("Company profile has been updated !");
+        redirect("admin_companies.php");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 function update_candidate_profile()
 {
 
@@ -1536,6 +1598,71 @@ function update_candidate_profile()
         redirect("admin/candidate_index.php");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+function update_candidate_profile_admin()
+{
+
+
+    if (isset($_POST['update'])) {
+
+        $candidate_id = $_GET['id'];
+        $description = $_POST['candidate_description'];
+
+        $cv        = $_FILES['file1']['name'];
+        $temp_cv   = $_FILES['file1']['tmp_name'];
+
+        $knowledge   = $_POST['candidate_knowledge'];
+        $skills      = $_POST['candidate_skills'];
+        $education   = $_POST['candidate_education'];
+        $experience  = $_POST['candidate_experience'];
+
+        $image        = $_FILES['file2']['name'];
+        $temp_image   = $_FILES['file2']['tmp_name'];
+
+
+        move_uploaded_file($temp_cv, "candidate_cv/$cv");
+        move_uploaded_file($temp_image, "images/$image");
+
+
+        if (empty($image)) {
+
+            $query = query("SELECT * FROM users WHERE user_id = '{$candidate_id}' ");
+            while ($row = fetch_array($query)) {
+                $image = $row['image'];
+            }
+        }
+
+
+        $query = query("SELECT * FROM users WHERE user_id = '{$candidate_id}' ");
+        while ($row = fetch_array($query)) {
+            $candidate_name = $row['username'];
+        }
+
+        /* QUERY */
+        $profile_query = "UPDATE candidate SET description = '{$description}' , cv = '{$cv}' , knowledge = '{$knowledge}' , skills = '{$skills}' , education = '{$education}' , experience = '{$experience}' , image = '{$image}' ";
+        $profile_query .= "WHERE name = '{$candidate_name}' ";
+        $query = query($profile_query);
+        confirm($query);
+
+
+        set_message("Profile has been updated !");
+        redirect("admin_candidates.php");
+    }
+}
+
+
 
 
 

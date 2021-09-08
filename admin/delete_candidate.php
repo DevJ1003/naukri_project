@@ -21,6 +21,6 @@ if (isset($_GET['id'])) {
 
 
         set_message("Candidate Deleted !");
-        redirect("admin_candidates.php");
+        redirect("../admin_candidates.php");
     }
 }

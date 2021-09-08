@@ -2,11 +2,10 @@
 
 <!-- Page Content -->
 <div class="text-center">
-    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
     <h3><i class="fa fa-user" style="font-size: 120px;"></i></h3>
     <h1>LOGIN</h1>
-
+    <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
     <!-- login form starts -->
     <form role="form" class="form" method="post">

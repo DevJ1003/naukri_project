@@ -8,5 +8,5 @@ if (isset($_GET['id'])) {
     confirm($query);
 
     set_message("Company Deleted !");
-    redirect("admin_companies.php");
+    redirect("../admin_companies.php");
 }

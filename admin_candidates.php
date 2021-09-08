@@ -1,9 +1,9 @@
-<?php include "includes/admin_header.php"; ?>
+<?php include "includes/header.php"; ?>
 
 
 <!-- Hero Area Start-->
 <div class="slider-area ">
-    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="../assets/img/hero/about.jpg">
+    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -30,6 +30,7 @@
                 <th>Email</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>Update</th>
                 <th>View Candidate</th>
                 <th>Delete</th>
             </tr>
@@ -42,4 +43,4 @@
 </div>
 <br>
 
-<?php include "includes/admin_footer.php"; ?>
+<?php include "includes/footer.php"; ?>
