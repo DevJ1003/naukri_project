@@ -25,7 +25,7 @@ Client/Company view
 2. View its posted jobs - list view of all the jobs posted ========================yes
 3. Applications received ================================================yes
 4. reject/accept applications ==================================================yes
-5. message candidate ====================================================yes         ( not working! ) + contact.php
+5. message candidate ====================================================yes         (working! ) + contact.php
 
 
 Candidate view

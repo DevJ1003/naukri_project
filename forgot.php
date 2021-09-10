@@ -1,29 +1,4 @@
-<?php include "includes/header.php";
-
-
-/* SENDING RESET PASSWORD PAGE LINK TO USER */
-if (isset($_POST['submit'])) {
-
-    $to = $_POST['email'];
-    $subject = wordwrap($_POST['subject'], 70);
-    // $body = $_POST['message'];
-    $from = "devtestphpmail.com";
-    $header = "From" . $from;
-
-    $message = mail($to, $from, "$subject", $header);
-
-    if (!$message) {
-
-        set_message("Sorry , we Could not send your message !");
-        redirect("contact.php");
-    } else {
-
-        set_message("Message sent sucessfully !");
-        redirect("contact.php");
-    }
-}
-
-?>
+<?php include "includes/header.php"; ?>
 
 <!-- Page Content -->
 <br>
@@ -34,15 +9,37 @@ if (isset($_POST['submit'])) {
     <h4 class="text-center bg-info"><?php display_message(); ?></h4>
 
     <!-- PASSWORD RESET LINK FORM -->
-    <form role="form" autocomplete="off" class="form" method="post">
+    <form role="form" autocomplete="off" class="form" method="post" id="contact" action="">
+        <?php reset_link_via_forgot();
+        ?>
+
+
         <div class="form-group">
-            <label for="email"><i class="fa fa-envelope"></i>
-                Email Id <input type="text" name="email" class="form-control" placeholder="Enter your email address">
+            <label for="email"><i class="fa fa-user"></i>
+                Username <input type="text" name="name" class="form-control" placeholder="Enter your username" required data-validation-required-message="Please enter your email">
             </label>
         </div>
 
         <div class="form-group">
-            <button name="recover_password" type="submit" class="btn head-btn2" value="Reset Password">Send Link !</button>
+            <label for="email"><i class="fa fa-envelope"></i>
+                Email Id <input type="email" name="email" class="form-control" placeholder="Enter your email address" required data-validation-required-message="Please enter your email">
+            </label>
+        </div>
+
+        <!-- User Type -->
+        <div class="form-group">
+            <label for="user-type">
+                <select name="user_type" id="" required data-validation-required-message="Please select">
+                    <option value="">Select User Type</option>
+                    <option value="0">Candidate</option>
+                    <option value="1">Company</option>
+                    <option value="2">nAukri.com - Admin</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button name="submit" type="submit" class="btn head-btn2">Send Link !</button>
         </div>
     </form>
 

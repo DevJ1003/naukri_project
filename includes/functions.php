@@ -174,8 +174,8 @@ function login_user()
 
     if (isset($_POST['submit'])) {
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
 
 
         $username = mysqli_real_escape_string($connection, $username);
@@ -192,10 +192,10 @@ function login_user()
             $db_username = $row['username'];
             $db_password = $row['password'];
             $db_usertype = $row['type'];
-            $db_status = $row['status'];
+            $db_status   = $row['status'];
 
 
-            if ($db_usertype == 0 && $db_status == 0 && $db_password == $password) {
+            if ($db_usertype == 0 && $db_status == 0 && password_verify($password, $db_password)) {
 
                 if (mysqli_num_rows($query) == 0) {
 
@@ -204,11 +204,10 @@ function login_user()
                 } else {
                     $_SESSION['user_id']  = $db_userid;
                     $_SESSION['username'] = $db_username;
-                    $_SESSION['password'] = $db_password;
                     $_SESSION['type']     = $db_usertype;
                     redirect("admin/candidate_index.php");
                 }
-            } elseif ($db_usertype == 1 && $db_status == 0 && $db_password == $password) {
+            } elseif ($db_usertype == 1 && $db_status == 0 && password_verify($password, $db_password)) {
 
                 if (mysqli_num_rows($query) == 0) {
 
@@ -218,11 +217,10 @@ function login_user()
 
                     $_SESSION['user_id']  = $db_userid;
                     $_SESSION['username'] = $db_username;
-                    $_SESSION['password'] = $db_password;
                     $_SESSION['type']     = $db_usertype;
                     redirect("admin/company_index.php");
                 }
-            } elseif ($db_usertype == 2 && $db_status == 0 && $db_password == $password) {
+            } elseif ($db_usertype == 2 && $db_status == 0 && password_verify($password, $db_password)) {
 
                 if (mysqli_num_rows($query) == 0) {
 
@@ -232,7 +230,6 @@ function login_user()
 
                     $_SESSION['user_id']  = $db_userid;
                     $_SESSION['username'] = $db_username;
-                    $_SESSION['password'] = $db_password;
                     $_SESSION['type']     = $db_usertype;
                     redirect("admin/admin_index.php");
                 }
@@ -743,6 +740,117 @@ function send_message()
 }
 
 
+
+
+
+
+
+
+
+
+function send_message_candidate()
+{
+
+
+
+    if (isset($_POST['submit'])) {
+
+
+
+        $to = $_POST['email'];
+        $subject = wordwrap($_POST['subject'], 70);
+        $body = $_POST['message'];
+        $from = "devtestphpmail.com";
+        $header = "From" . $from;
+
+
+        $message = mail($to, $from, "$subject", $body, $header);
+
+        if (!$message) {
+
+            set_message("Sorry , we Could not send your message !");
+            redirect("candidate_message.php");
+        } else {
+
+            set_message("Message sent sucessfully !");
+            redirect("candidate_message.php");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+function forgot_mail()
+{
+
+    /* SENDING RESET PASSWORD PAGE LINK TO USER */
+    if (isset($_POST['submit'])) {
+
+        $to = $_POST['email'];
+        $subject = $_POST['email'];
+        // $body = $_POST['message'];
+        $from = "devtestphpmail.com";
+        // $header = "From" . $from;
+        $message = mail($to, $from, "$subject");
+
+        if (!$message) {
+
+            set_message("Sorry , we Could not send your link !");
+            redirect("forgot.php");
+        } else {
+
+            set_message("Reset password link sent sucessfully !");
+            redirect("login.php");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+function reset_link_via_forgot()
+{
+
+    if (isset($_POST['submit'])) {
+
+
+        $username = $_POST['name'];
+        $user_email = $_POST['email'];
+        $user_type = $_POST['user_type'];
+
+        $select_user = query("SELECT * FROM users WHERE username = '{$username}' ");
+        confirm($select_user);
+
+        while ($row = fetch_array($select_user)) {
+
+            $user_id = $row['user_id'];
+            $email = $row['email'];
+            $type = $row['type'];
+
+            if ($user_email == $email && $user_type == $type) {
+
+                set_message("Set your new password here !");
+                redirect("reset_password.php");
+            } else {
+
+                set_message("Incorrect Credentials !");
+                redirect("forgot.php");
+            }
+        }
+    }
+}
 
 
 
@@ -1366,6 +1474,54 @@ function job_detail_page_link()
 
 
 
+function reset_password()
+{
+
+    if (isset($_POST['submit'])) {
+
+        if (isset($_GET['id'])) {
+
+            $user_id = $_GET['id'];
+
+            var_dump($user_id);
+            die;
+
+            if ($_POST['password'] && $_POST['confirm_password']) {
+                if ($_POST['password'] == $_POST['confirm_password']) {
+
+                    $password = $_POST['password'];
+                    $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
+
+                    $reset_query = "UPDATE users SET password = '{$new_password}' ";
+                    $reset_query .= "WHERE user_id = '{$user_id}' ";
+                    $query = query($reset_query);
+                    confirm($query);
+
+                    if ($query) {
+
+                        set_message("Password changed sucessfully !");
+                        redirect("login.php");
+                    } else {
+
+                        set_message("Password not changed !");
+                        redirect("reset.php");
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 /************************************* END FRONT DATA FUCNTIONS *****************************/
 
 
@@ -1877,12 +2033,12 @@ function get_applied_jobs_company_admin()
                         <td>{$applied_job_location}</td>
                         <td>{$applied_at}</td>
                         <td>
-                            <div class="header-btn d-none f-right d-lg-block">
+                            <div class="header-btn d-none d-lg-block">
                                 <a href="candidate_details.php?id={$user_id}" class="btn border-btn head-btn1">{$applied_job_username}</a>
                             </div>
                         </td>
                         <td>
-                            <div class="header-btn d-none f-right d-lg-block">
+                            <div class="header-btn d-none d-lg-block">
                                 <a href="job_details.php?id={$job_id}" class="btn border-btn head-btn1">View</a>
                             </div>
                         </td>
