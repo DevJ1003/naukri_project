@@ -14,6 +14,9 @@
     <div class="form-group"><label for="email">
             <span class="glyphicon glyphicon-lock"></span><input type="text" name="email" class="form-control" placeholder="Enter your Email_Id" required data-validation-required-message="Please enter Email"></label>
     </div>
+    <div class="form-group"><label for="passcode">
+            <span class="glyphicon glyphicon-lock"></span><input type="text" name="passcode" class="form-control" placeholder="6 digit passcode" required data-validation-required-message="Please enter Passcode"></label>
+    </div>
     <div class="form-group"><label for="password">
             <span class="glyphicon glyphicon-lock"></span><input type="password" name="password" class="form-control" placeholder="Enter your Password" required data-validation-required-message="Please enter Password"></label>
     </div>
@@ -38,6 +41,8 @@
     <div class="form-group">
         <button name="register" type="submit" class="btn head-btn2">Register <span class="glyphicon glyphicon-log-in"></span></button>
     </div>
+
+    <p>* User must remember it's CODE , passcode entered once cannot be changed !</p>
 
 </form>
 

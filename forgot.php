@@ -10,8 +10,7 @@
 
     <!-- PASSWORD RESET LINK FORM -->
     <form role="form" autocomplete="off" class="form" method="post" id="contact" action="">
-        <?php reset_link_via_forgot();
-        ?>
+        <?php reset_link_via_forgot(); ?>
 
 
         <div class="form-group">

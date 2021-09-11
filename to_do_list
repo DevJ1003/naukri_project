@@ -50,3 +50,8 @@ status -> boolean -> true/false
 created_at -> currrent timestamp
 updated_at -> current timestamp(on change)
 password -> encrypted password
+
+
+
+
+edit jobs ========================================= update

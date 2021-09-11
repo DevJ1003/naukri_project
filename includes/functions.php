@@ -135,8 +135,12 @@ function register_user()
 
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $code = $_POST['passcode'];
+        $code = $_POST['passcode'];
+        $hashed_passcode = password_hash($code, PASSWORD_BCRYPT, array('cost' => 6));
 
+
+        $password = $_POST['password'];
         $hashed_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
 
         $user_type = $_POST['user_type'];
@@ -147,7 +151,7 @@ function register_user()
         move_uploaded_file($temp_image, "images/$image");
 
 
-        $generated_query = "INSERT INTO users(username, password , type , email , image) VALUES('{$username}'  , '{$hashed_password}' , '{$user_type}' , '{$email}', '{$image}') ";
+        $generated_query = "INSERT INTO users(username, password , type , email , image , code) VALUES('{$username}'  , '{$hashed_password}' , '{$user_type}' , '{$email}', '{$image}' , '{$hashed_passcode}') ";
         $query = query($generated_query);
         confirm($query);
 
@@ -861,6 +865,86 @@ function reset_link_via_forgot()
 
 
 
+
+
+function reset_password()
+{
+
+    global $connection;
+
+    if (isset($_POST['submit'])) {
+
+
+        $passcode = trim($_POST['passcode']);
+        $passcode = mysqli_real_escape_string($connection, $passcode);
+
+
+        $code_query = query("SELECT * FROM users WHERE code = '{$passcode}' ");
+        $query = query($code_query);
+        confirm($query);
+
+        while ($row = mysqli_fetch_array($query)) {
+
+            $user_id   = $row['user_id'];
+            $user_code   = $row['code'];
+
+            var_dump($user_id);
+            die;
+
+
+
+            if (password_verify($passcode, $user_code)) {
+
+
+                $code_query = "SELECT * FROM users WHERE code = '{$passcode}' ";
+                $query = query($code_query);
+                confirm($query);
+
+                while ($row = mysqli_fetch_array($query)) {
+                    $user_id   = $row['user_id'];
+                    $username   = $row['username'];
+                }
+            }
+        }
+
+
+        if ($_POST['password'] && $_POST['confirm_password']) {
+            if ($_POST['password'] == $_POST['confirm_password']) {
+
+                $password = $_POST['password'];
+                $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
+
+                $reset_query = "UPDATE users SET password = '{$new_password}' ";
+                $reset_query .= "WHERE user_id = '{$_GET['id']}' ";
+                $query = query($reset_query);
+                confirm($query);
+
+                if ($query) {
+
+                    set_message("Password changed sucessfully !");
+                    redirect("login.php");
+                } else {
+
+                    set_message("Password not changed !");
+                    redirect("reset_password.php");
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /********************************************* END MESSAGE FUCNTION ******************************************/
 
 
@@ -1474,43 +1558,43 @@ function job_detail_page_link()
 
 
 
-function reset_password()
-{
+// function reset_password()
+// {
 
-    if (isset($_POST['submit'])) {
+//     if (isset($_POST['submit'])) {
 
-        if (isset($_GET['id'])) {
+//         if (isset($_GET['id'])) {
 
-            $user_id = $_GET['id'];
+//             $user_id = $_GET['id'];
 
-            var_dump($user_id);
-            die;
+//             var_dump($user_id);
+//             die;
 
-            if ($_POST['password'] && $_POST['confirm_password']) {
-                if ($_POST['password'] == $_POST['confirm_password']) {
+//             if ($_POST['password'] && $_POST['confirm_password']) {
+//                 if ($_POST['password'] == $_POST['confirm_password']) {
 
-                    $password = $_POST['password'];
-                    $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
+//                     $password = $_POST['password'];
+//                     $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
 
-                    $reset_query = "UPDATE users SET password = '{$new_password}' ";
-                    $reset_query .= "WHERE user_id = '{$user_id}' ";
-                    $query = query($reset_query);
-                    confirm($query);
+//                     $reset_query = "UPDATE users SET password = '{$new_password}' ";
+//                     $reset_query .= "WHERE user_id = '{$user_id}' ";
+//                     $query = query($reset_query);
+//                     confirm($query);
 
-                    if ($query) {
+//                     if ($query) {
 
-                        set_message("Password changed sucessfully !");
-                        redirect("login.php");
-                    } else {
+//                         set_message("Password changed sucessfully !");
+//                         redirect("login.php");
+//                     } else {
 
-                        set_message("Password not changed !");
-                        redirect("reset.php");
-                    }
-                }
-            }
-        }
-    }
-}
+//                         set_message("Password not changed !");
+//                         redirect("reset.php");
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 
