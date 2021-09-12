@@ -52,7 +52,7 @@ include "../includes/functions.php"; ?>
                         <div class="col-lg-3 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="../index.php"><img src="../assets/img/logo/logo.png" alt=""></a>
+                                <a href="../index"><img src="../assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9">
@@ -61,15 +61,15 @@ include "../includes/functions.php"; ?>
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="../index.php"><i class="fas fa-home"></i> Home</a></li>
+                                            <li><a href="../index"><i class="fas fa-home"></i> Home</a></li>
                                             <?php
                                             admin_link_user_type_admin();
                                             ?>
                                             <li><a href="#"><i class="fab fa-font-awesome-flag"></i> More</a>
                                                 <ul class="submenu">
                                                     <?php profile_link_admin(); ?>
-                                                    <li><a href="../contact.php"><i class="far fa-paper-plane"></i> Contact</a></li>
-                                                    <li><a href="../about.php"><i class="fas fa-anchor"></i> About</a></li>
+                                                    <li><a href="../contact"><i class="far fa-paper-plane"></i> Contact</a></li>
+                                                    <li><a href="../about"><i class="fas fa-anchor"></i> About</a></li>
                                                 </ul>
                                             </li>
                                         </ul>

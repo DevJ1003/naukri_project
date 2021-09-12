@@ -10,7 +10,13 @@ if (isset($_GET['id'])) {
     while ($row = fetch_array($query)) {
         $title       = escape_string($row['title']);
         $description = escape_string($row['description']);
-        $salary        = escape_string($row['salary']);
+        $vacancy     = escape_string($row['vacancy']);
+        $nature      = escape_string($row['nature']);
+        $knowledge   = escape_string($row['knowledge']);
+        $skills      = escape_string($row['skills']);
+        $education   = escape_string($row['education']);
+        $experience  = escape_string($row['experience']);
+        $salary      = escape_string($row['salary']);
         $location    = escape_string($row['location']);
     }
 
@@ -50,6 +56,37 @@ if (isset($_GET['id'])) {
             <div class="form-group">
                 <label for="job-description">DESCRIPTION</label>
                 <textarea type="text" name="job_description" id="" cols="30" rows="10" class="form-control"><?php echo $description; ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="job-vacancy">VACANCY</label>
+                <input type="text" name="job_vacancy" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $vacancy; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="job-nature">NATURE</label>
+                <input type="text" name="job_nature" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $nature; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="job-knowledge">KNOWLEDGE</label>
+                <input type="text" name="job_knowledge" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $knowledge; ?>">
+            </div>
+
+
+            <div class="form-group">
+                <label for="job-skills">SKILLS</label>
+                <input type="text" name="job_skills" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $skills; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="job-education">EDUCATION</label>
+                <input type="text" name="job_education" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $education; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="job-experience">EXPERIENCE</label>
+                <input type="text" name="job_experience" class="form-control" required data-validation-required-message="Please Enter" value="<?php echo $experience; ?>">
             </div>
 
             <div class=" form-group">

@@ -59,7 +59,13 @@
         ?>
 
         <div class="form-group">
-            <label for="passcode"><i class="fa fa-user"></i>
+            <label for="username"><i class="fa fa-user"></i>
+                Username <input type="text" name="username" class="form-control" placeholder="Enter your username">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="passcode"><i class="fa fa-list"></i>
                 Passcode <input type="password" name="passcode" class="form-control" placeholder="6 DIGIT PASSCODE">
             </label>
         </div>

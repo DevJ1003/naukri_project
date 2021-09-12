@@ -25,7 +25,7 @@ Client/Company view
 2. View its posted jobs - list view of all the jobs posted ========================yes
 3. Applications received ================================================yes
 4. reject/accept applications ==================================================yes
-5. message candidate ====================================================yes         (working! ) + contact.php
+5. message candidate ====================================================yes
 
 
 Candidate view
@@ -39,7 +39,7 @@ User Account management
 
 1. Resgiter ===============================yes
 2. Login ========================================yes
-3. Forgot password
+3. Forgot password ========================================yes
 
 ====================================
 
@@ -50,8 +50,3 @@ status -> boolean -> true/false
 created_at -> currrent timestamp
 updated_at -> current timestamp(on change)
 password -> encrypted password
-
-
-
-
-edit jobs ========================================= update

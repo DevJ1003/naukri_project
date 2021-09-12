@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <button name="submit" type="submit" class="btn head-btn2">Send Link !</button>
+            <button name="submit" type="submit" class="btn head-btn2">Submit !</button>
         </div>
     </form>
 

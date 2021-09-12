@@ -204,7 +204,7 @@ function login_user()
                 if (mysqli_num_rows($query) == 0) {
 
                     set_message("Your Username or Password is wrong !");
-                    redirect("login.php");
+                    redirect("login");
                 } else {
                     $_SESSION['user_id']  = $db_userid;
                     $_SESSION['username'] = $db_username;
@@ -216,7 +216,7 @@ function login_user()
                 if (mysqli_num_rows($query) == 0) {
 
                     set_message("Your Username or Password is wrong !");
-                    redirect("login.php");
+                    redirect("login");
                 } else {
 
                     $_SESSION['user_id']  = $db_userid;
@@ -229,7 +229,7 @@ function login_user()
                 if (mysqli_num_rows($query) == 0) {
 
                     set_message("Your Username or Password is wrong !");
-                    redirect("login.php");
+                    redirect("login");
                 } else {
 
                     $_SESSION['user_id']  = $db_userid;
@@ -291,7 +291,7 @@ function admin_link_user_type_home()
         if ($usertype == 0) {
 
             $candidate_admin = <<<DELIMETER
-                <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+                <li><a href="job_listing"><i class="fas fa-briefcase"></i> Find a Job</a></li>
                 <li><a href="admin/candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
                 <li><a href="candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
             DELIMETER;
@@ -316,7 +316,7 @@ function admin_link_user_type_home()
     } else {
 
         $find_job_button = <<<DELIMETER
-            <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+            <li><a href="job_listing"><i class="fas fa-briefcase"></i> Find a Job</a></li>
 
         DELIMETER;
         echo $find_job_button;
@@ -350,7 +350,7 @@ function admin_link_user_type_admin()
         if ($usertype == 0) {
 
             $candidate_admin = <<<DELIMETER
-                <li><a href="../job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+                <li><a href="../job_listing"><i class="fas fa-briefcase"></i> Find a Job</a></li>
                 <li><a href="candidate_index.php"><i class="fas fa-user"></i> Admin</a></li>
                 <li><a href="../candidate_applications.php"><i class="fas fa-bell"></i> Applications</a></li>
             DELIMETER;
@@ -379,7 +379,7 @@ function admin_link_user_type_admin()
 
         $find_job_button = <<<DELIMETER
 
-        <li><a href="job_listing.php"><i class="fas fa-briefcase"></i> Find a Job</a></li>
+        <li><a href="job_listing"><i class="fas fa-briefcase"></i> Find a Job</a></li>
 
 DELIMETER;
 
@@ -534,7 +534,7 @@ function login_find_add_job_link()
         if ($usertype == 0) {
 
             $candidate_homepage = <<<DELIMETER
-                <a href="job_listing.php" class="btn head-btn1">Apply for new jobs !</a>
+                <a href="job_listing" class="btn head-btn1">Apply for new jobs !</a>
             DELIMETER;
 
             echo $candidate_homepage;
@@ -557,7 +557,7 @@ function login_find_add_job_link()
 
         $login_button = <<<DELIMETER
 
-    <a href="login.php" class="btn head-btn1">Login to Apply !</a>
+    <a href="login" class="btn head-btn1">Login to Apply !</a>
 
 DELIMETER;
 
@@ -595,7 +595,7 @@ function browse_sector_link()
         if ($usertype == 0) {
 
             $browse_sector_link_candidate = <<<DELIMETER
-                <a href="job_listing.php" class="border-btn2">Browse All Sectors !</a>
+                <a href="job_listing" class="border-btn2">Browse All Sectors !</a>
                 DELIMETER;
 
             echo $browse_sector_link_candidate;
@@ -618,7 +618,7 @@ function browse_sector_link()
 
         $browse_sector = <<<DELIMETER
     
-            <a href="job_listing.php" class="border-btn2">Browse All Sectors !</a>
+            <a href="job_listing" class="border-btn2">Browse All Sectors !</a>
     
     DELIMETER;
 
@@ -646,8 +646,8 @@ function show_login_logout_link_homepage()
 
         $login = <<<DELIMETER
 
-    <a href="registration.php" class="btn head-btn1">Register</a>
-    <a href="login.php" class="btn head-btn1">Login</a>
+    <a href="registration" class="btn head-btn1">Register</a>
+    <a href="login" class="btn head-btn1">Login</a>
 
 
     DELIMETER;
@@ -682,8 +682,8 @@ function show_login_logout_link()
 
         $login = <<<DELIMETER
 
-    <a href="registration.php" class="btn head-btn1">Register</a>
-    <a href="login.php" class="btn head-btn1">Login</a>
+    <a href="registration" class="btn head-btn1">Register</a>
+    <a href="login" class="btn head-btn1">Login</a>
 
 
     DELIMETER;
@@ -846,11 +846,11 @@ function reset_link_via_forgot()
             if ($user_email == $email && $user_type == $type) {
 
                 set_message("Set your new password here !");
-                redirect("reset_password.php");
+                redirect("reset_password");
             } else {
 
                 set_message("Incorrect Credentials !");
-                redirect("forgot.php");
+                redirect("forgot");
             }
         }
     }
@@ -874,61 +874,49 @@ function reset_password()
 
     if (isset($_POST['submit'])) {
 
+        $username           = $_POST['username'];
+        $passcode           = trim($_POST['passcode']);
+        $passcode           = mysqli_real_escape_string($connection, $passcode);
+        $password           = $_POST['password'];
+        $confirm_password   = $_POST['confirm_password'];
+        $hashed_password = password_hash($confirm_password, PASSWORD_BCRYPT, array('cost' => 10));
 
-        $passcode = trim($_POST['passcode']);
-        $passcode = mysqli_real_escape_string($connection, $passcode);
+        $user_query = query("SELECT * FROM users WHERE username = '{$username}' ");
+        confirm($user_query);
 
+        while ($row = fetch_array($user_query)) {
 
-        $code_query = query("SELECT * FROM users WHERE code = '{$passcode}' ");
-        $query = query($code_query);
-        confirm($query);
-
-        while ($row = mysqli_fetch_array($query)) {
-
-            $user_id   = $row['user_id'];
-            $user_code   = $row['code'];
-
-            var_dump($user_id);
-            die;
-
-
-
-            if (password_verify($passcode, $user_code)) {
-
-
-                $code_query = "SELECT * FROM users WHERE code = '{$passcode}' ";
-                $query = query($code_query);
-                confirm($query);
-
-                while ($row = mysqli_fetch_array($query)) {
-                    $user_id   = $row['user_id'];
-                    $username   = $row['username'];
-                }
-            }
+            $user_id = $row['user_id'];
+            $user_code = $row['code'];
         }
 
+        if (password_verify($passcode, $user_code)) {
 
-        if ($_POST['password'] && $_POST['confirm_password']) {
-            if ($_POST['password'] == $_POST['confirm_password']) {
+            if ($password == $confirm_password) {
 
-                $password = $_POST['password'];
-                $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
-
-                $reset_query = "UPDATE users SET password = '{$new_password}' ";
-                $reset_query .= "WHERE user_id = '{$_GET['id']}' ";
-                $query = query($reset_query);
+                $password_query = "UPDATE users SET password = '{$hashed_password}' ";
+                $password_query .= "WHERE username = '{$username}' AND user_id = '{$user_id}' ";
+                $query = query($password_query);
                 confirm($query);
 
                 if ($query) {
 
                     set_message("Password changed sucessfully !");
-                    redirect("login.php");
+                    redirect("login");
                 } else {
 
                     set_message("Password not changed !");
-                    redirect("reset_password.php");
+                    redirect("reset_password");
                 }
+            } else {
+
+                set_message("Password not matched !");
+                redirect("reset_password");
             }
+        } else {
+
+            set_message("Incorrect credentials !");
+            redirect("reset_password");
         }
     }
 }
@@ -1364,7 +1352,7 @@ function apply_button_in_job_details()
         $apply_login_button = <<<DELIMETER
 
         <div class="apply-btn2">
-            <a href="login.php"><button name="apply" type="submit" class="btn head-btn1">Apply Now !</button></a>
+            <a href="login"><button name="apply" type="submit" class="btn head-btn1">Apply Now !</button></a>
         </div>
 
     DELIMETER;
@@ -1462,13 +1450,56 @@ function view_button_job_details()
 
         $apply_login_button = <<<DELIMETER
                 <div class="company-details">
-                    <a href="login.php"><button name="company_details" type="submit" class="btn head-btn1">View Details !</button></a>
+                    <a href="login"><button name="company_details" type="submit" class="btn head-btn1">View Details !</button></a>
                 </div>
     DELIMETER;
 
         echo $apply_login_button;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+function job_detail_image_link()
+{
+
+    if (IsLoggedIn()) {
+
+
+        $query = query("SELECT company_id FROM jobs WHERE id =" . escape_string($_GET['id']));
+        confirm($query);
+
+        while ($row = fetch_array($query)) {
+            $company_id = $row['company_id'];
+        }
+
+        $company_link = <<<DELIMETER
+
+company_details.php?id=$company_id
+
+DELIMETER;
+
+        echo $company_link;
+    } else {
+
+        $login_link = <<<DELIMETER
+
+        login
+
+        DELIMETER;
+
+        echo $login_link;
+    }
+}
+
 
 
 
@@ -1681,11 +1712,17 @@ function update_jobs()
 
         $title = $_POST['job_title'];
         $description = $_POST['job_description'];
+        $vacancy = $_POST['job_vacancy'];
+        $nature = $_POST['job_nature'];
+        $knowledge = $_POST['job_knowledge'];
+        $skills = $_POST['job_skills'];
+        $education = $_POST['job_education'];
+        $experience = $_POST['job_experience'];
         $salary = $_POST['job_salary'];
         $location = $_POST['job_location'];
 
 
-        $query  = "UPDATE jobs SET title = '{$title}' , description = '{$description}' , salary = '{$salary}' , location = '{$location}' ";
+        $query  = "UPDATE jobs SET title = '{$title}' , description = '{$description}' , vacancy = '{$vacancy}' , nature = '{$nature}' , knowledge = '{$knowledge}' , skills = '{$skills}' , education = '{$education}' , experience = '{$experience}' , salary = '{$salary}' , location = '{$location}' ";
         $query .= "WHERE id =" . escape_string($_GET['id']);
         $update_job_query = query($query);
         confirm($update_job_query);

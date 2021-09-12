@@ -74,7 +74,7 @@ if (isset($_GET['id'])) {
                 <div class="single-job-items mb-50">
                     <div class="job-items">
                         <div class="company-img company-img-details">
-                            <a href="company_details.php?id=<?php echo $company_id; ?>"><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
+                            <a href=<?php job_detail_image_link(); ?>><img width="100" src="images/<?php echo $company_image; ?>" alt=""></a>
                         </div>
                         <div class="job-tittle">
                             <h4><?php echo $title; ?></h4>
@@ -155,11 +155,6 @@ if (isset($_GET['id'])) {
                         <li><i class="fas fa-desktop" style="font-size: 25px;"></i> <span> www.<?php echo $company_name; ?>.com</span></li>
                         <li><i class="far fa-envelope" style="font-size: 25px;"></i> <span><?php echo $company_email; ?></span></li>
                         <li>
-                            <!-- <div class="company-details">
-                                <a href="company_details.php?id=<?php //echo $company_id; 
-                                                                ?>"><button name="company_details" type="submit" class="btn head-btn1">View</button></a>
-                            </div> -->
-
                             <?php view_button_job_details(); ?>
                         </li>
                     </ul>
