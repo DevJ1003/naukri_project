@@ -1238,6 +1238,16 @@ DELIMETER;
 
 
 
+
+
+
+
+
+
+
+
+
+
 function get_all_candidates()
 {
 
@@ -1248,61 +1258,54 @@ function get_all_candidates()
     while ($row = fetch_array($query)) {
 
         $candidate_id = $row['user_id'];
-        $candidate_name = $row['username'];
-        $candidate_email = $row['email'];
-        // $candidate_status = $row['status'];
 
-
-
-        $candidate_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
-        confirm($candidate_query);
-
-
-        while ($row = fetch_array($candidate_query)) {
-
-
-
-            $admin_all_candidates = <<<DELIMETER
+        $admin_all_candidates = <<<DELIMETER
 
 <tr>
     <td>
         <img width="100" src="images/{$row['image']}" alt="">
     </td>
-    <td>{$candidate_name}</td>
-    <td>{$candidate_email}</td>
+    <td>{$row['username']}</td>
+    <td>{$row['email']}</td>
     <td>{$row['description']}</td>
     <td>
-        <div class="send-activate activate_candidate">
-            <a href="admin/activate_candidate.php?id={$candidate_id}"><button name="activate_candidate" type="activate-candidate" class="btn head-btn1">Activate !</button></a>
-        </div>
-        <br>
-        <div class="send-deactivate deactivate_candidate">
-            <a href="admin/deactivate_candidate.php?id={$candidate_id}"><button name="deactivate_candidate" type="deactivate-candidate" class="btn head-btn1">Deactivate !</button></a>
-        </div>
-    </td>
-    <td>
-        <div class="header-btn d-none d-lg-block">
-            <a href="admin_candidate_profile.php?id={$candidate_id}" class="btn border-btn head-btn1">Update</a>
-        </div>
-    </td>
-    <td>
-        <div class="header-btn d-none d-lg-block">
-            <a href="candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
-        </div>
-    </td>
-    <td>
-        <div class="header-btn d-none d-lg-block candidate_delete">
-            <a href="admin/delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
-        </div>
-    </td>
+            <div class="send-activate activate_candidate">
+                <a href="admin/activate_candidate.php?id={$candidate_id}"><button name="activate_candidate" type="activate-candidate" class="btn head-btn1">Activate !</button></a>
+            </div>
+            <br>
+            <div class="send-deactivate deactivate_candidate">
+                <a href="admin/deactivate_candidate.php?id={$candidate_id}"><button name="deactivate_candidate" type="deactivate-candidate" class="btn head-btn1">Deactivate !</button></a>
+            </div>
+        </td>
+        <td>
+            <div class="header-btn d-none d-lg-block">
+                <a href="admin_candidate_profile.php?id={$candidate_id}" class="btn border-btn head-btn1">Update</a>
+            </div>
+        </td>
+        <td>
+            <div class="header-btn d-none d-lg-block">
+                <a href="candidate_details.php?id={$candidate_id}" class="btn border-btn head-btn1">View</a>
+            </div>
+        </td>
+        <td>
+            <div class="header-btn d-none d-lg-block candidate_delete">
+                <a href="admin/delete_candidate.php?id={$candidate_id}" class="btn border-btn head-btn1">Delete</a>
+            </div>
+        </td>
 </tr>
 
 DELIMETER;
 
-            echo $admin_all_candidates;
-        }
+        echo $admin_all_candidates;
     }
 }
+
+
+
+
+
+
+
 
 
 
@@ -1325,10 +1328,14 @@ function apply_button_in_job_details()
         $user_query = query("SELECT type FROM users WHERE username = '{$username}' ");
         confirm($user_query);
 
+
+
         while ($row = fetch_array($user_query)) {
 
             $usertype = $row['type'];
         }
+
+
 
         $job_query = query("SELECT id FROM jobs WHERE id =" . escape_string($_GET['id']));
         confirm($job_query);
@@ -1344,6 +1351,8 @@ function apply_button_in_job_details()
             </div>
 
         DELIMETER;
+
+            // var_dump($_GET['id']);
 
             echo $candidate_button;
         }
@@ -1522,37 +1531,47 @@ function job_detail_page_link()
 
     if (isset($_GET['id'])) {
 
-        $user_query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
-        confirm($user_query);
+        if (isset($_GET['job_id'])) {
 
-        while ($row = fetch_array($user_query)) {
-            $candidate_id = $row['user_id'];
-            $candidate_name = $row['username'];
+            $user_query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
+            confirm($user_query);
 
-
-            $query = query("SELECT cv FROM candidate WHERE name = '{$candidate_name}' ");
-            confirm($query);
-
-            while ($row = fetch_array($query)) {
-
-                $candidate_cv = $row['cv'];
-            }
+            while ($row = fetch_array($user_query)) {
+                $candidate_id = $row['user_id'];
+                $candidate_name = $row['username'];
 
 
-            if ($usertype == 1) {
 
-                $company_link = <<<DELIMETER
+
+
+
+
+
+
+                $query = query("SELECT cv FROM candidate WHERE name = '{$candidate_name}' ");
+                confirm($query);
+
+                while ($row = fetch_array($query)) {
+
+                    $candidate_cv = $row['cv'];
+                }
+
+
+
+                if ($usertype == 1) {
+
+                    $company_link = <<<DELIMETER
 
                     <div class="candidate-details">
                         <a href="candidate_cv/$candidate_cv"><button name="candidate_details" type="submit" class="btn head-btn1">View CV</button></a>
                     </div>
                     <br>
                     <div class="send-accept">
-                        <a href="accept_application.php?id=$candidate_id"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
+                        <a href="accept_application.php?id=$candidate_id&job_id={$_GET['job_id']}"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
                     </div>
                     <br>
                     <div class="send-reject">
-                        <a href="reject_application.php?id=$candidate_id"><button name="reject_application" type="reject-application" class="btn head-btn1">Reject Application !</button></a>
+                        <a href="reject_application.php?id=$candidate_id&job_id={$_GET['job_id']}"><button name="reject_application" type="reject-application" class="btn head-btn1">Reject Application !</button></a>
                     </div>
                     <br>
                     <div class="send-message">
@@ -1560,10 +1579,10 @@ function job_detail_page_link()
                     </div>
 
                 DELIMETER;
-                echo $company_link;
-            } elseif ($usertype == 2) {
+                    echo $company_link;
+                } elseif ($usertype == 2) {
 
-                $admin_link = <<<DELIMETER
+                    $admin_link = <<<DELIMETER
 
                     <div class="candidate-details">
                         <a href="candidate_cv/$candidate_cv"><button name="candidate_details" type="submit" class="btn head-btn1">View CV</button></a>
@@ -1574,7 +1593,8 @@ function job_detail_page_link()
                     </div>
 
                 DELIMETER;
-                echo $admin_link;
+                    echo $admin_link;
+                }
             }
         }
     }
@@ -2155,12 +2175,12 @@ function get_applied_jobs_company_admin()
                         <td>{$applied_at}</td>
                         <td>
                             <div class="header-btn d-none d-lg-block">
-                                <a href="candidate_details.php?id={$user_id}" class="btn border-btn head-btn1">{$applied_job_username}</a>
+                                <a href="candidate_details.php?id={$user_id}&job_id={$applied_job_id}" class="btn border-btn head-btn1">{$applied_job_username}</a>
                             </div>
                         </td>
                         <td>
                             <div class="header-btn d-none d-lg-block">
-                                <a href="job_details.php?id={$job_id}" class="btn border-btn head-btn1">View</a>
+                                <a href="job_details.php?id={$job_id}&job_id={$applied_job_id}" class="btn border-btn head-btn1">View</a>
                             </div>
                         </td>
                     </tr>

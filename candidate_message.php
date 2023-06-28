@@ -1,34 +1,4 @@
-<?php include "includes/header.php";
-
-
-/* MESSAGE CANDIDATE QUERY */
-// if (isset($_GET['id'])) {
-
-//     $query = query("SELECT * FROM users WHERE user_id =" . escape_string($_GET['id']));
-//     confirm($query);
-
-//     while ($row = fetch_array($query)) {
-
-//         $candidate_id = escape_string($row['user_id']);
-//         $candidate_name = escape_string($row['username']);
-//     }
-
-//     $details_query = query("SELECT * FROM candidate WHERE name = '{$candidate_name}' ");
-//     confirm($details_query);
-
-//     while ($row = fetch_array($details_query)) {
-
-//         $candidate_description = $row['description'];
-//         $candidate_cv          = $row['cv'];
-//         $candidate_knowledge   = $row['knowledge'];
-//         $candidate_skills      = $row['skills'];
-//         $candidate_education   = $row['education'];
-//         $candidate_experience  = $row['experience'];
-//         $candidate_image       = $row['image'];
-//     }
-// }
-
-?>
+<?php include "includes/header.php"; ?>
 
 <!-- Hero Area Start-->
 <div class="slider-area ">

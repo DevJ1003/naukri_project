@@ -12,12 +12,12 @@ if (isset($_GET['id'])) {
     while ($row = fetch_array($jobs_data_query)) {
 
         $job_id = $_GET['id'];
+
+
+        $jobs_delete_data_query = query("DELETE FROM applications WHERE job_id = '{$job_id}' ");
+        confirm($jobs_delete_data_query);
+
+        set_message("You retrieved your application !");
+        redirect("admin/candidate_index.php");
     }
-
-
-    $jobs_delete_data_query = query("DELETE FROM applications WHERE job_id = '{$job_id}' ");
-    confirm($jobs_delete_data_query);
-
-    set_message("You retrieved your application !");
-    redirect("admin/candidate_index.php");
 }
