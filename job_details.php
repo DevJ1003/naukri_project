@@ -138,7 +138,7 @@ if (isset($_GET['id'])) {
 
                     apply_button_in_job_details();
 
-                    apply_button_retrieve_button();
+                    // apply_button_retrieve_button();
 
                     ?>
 

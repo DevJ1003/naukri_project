@@ -34,7 +34,7 @@
                 <option value="">Select User Type</option>
                 <option value="0">Candidate</option>
                 <option value="1">Company</option>
-                <option value="2">nAukri.com - Admin</option>
+                <option value="2">naukri.com - Admin</option>
             </select>
         </label>
     </div>

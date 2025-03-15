@@ -1567,7 +1567,7 @@ function job_detail_page_link()
                     </div>
                     <br>
                     <div class="send-accept">
-                        <a href="accept_application.php?id=$candidate_id&job_id={$_GET['job_id']}"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application !</button></a>
+                        <a href="accept_application.php?id=$candidate_id&job_id={$_GET['job_id']}"><button name="accept_application" type="accept-application" class="btn head-btn1">Accept Application!</button></a>
                     </div>
                     <br>
                     <div class="send-reject">
@@ -1575,7 +1575,7 @@ function job_detail_page_link()
                     </div>
                     <br>
                     <div class="send-message">
-                        <a href="candidate_message.php?id=$candidate_id"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate !</button></a>
+                        <a href="candidate_message.php?id=$candidate_id"><button name="message_candidate" type="message_candidate" class="btn head-btn1">Message Candidate</button></a>
                     </div>
 
                 DELIMETER;
@@ -1605,47 +1605,6 @@ function job_detail_page_link()
 
 
 
-
-
-
-
-// function reset_password()
-// {
-
-//     if (isset($_POST['submit'])) {
-
-//         if (isset($_GET['id'])) {
-
-//             $user_id = $_GET['id'];
-
-//             var_dump($user_id);
-//             die;
-
-//             if ($_POST['password'] && $_POST['confirm_password']) {
-//                 if ($_POST['password'] == $_POST['confirm_password']) {
-
-//                     $password = $_POST['password'];
-//                     $new_password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
-
-//                     $reset_query = "UPDATE users SET password = '{$new_password}' ";
-//                     $reset_query .= "WHERE user_id = '{$user_id}' ";
-//                     $query = query($reset_query);
-//                     confirm($query);
-
-//                     if ($query) {
-
-//                         set_message("Password changed sucessfully !");
-//                         redirect("login.php");
-//                     } else {
-
-//                         set_message("Password not changed !");
-//                         redirect("reset.php");
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
 
 
 

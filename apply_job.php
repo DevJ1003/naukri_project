@@ -18,10 +18,22 @@ if (isset($_GET['id'])) {
     $username    =  $_SESSION['username'];
 
 
-    $job_apply_query = "INSERT INTO applications( job_id , user_id , company_id ) VALUES( '{$job_id}' , '{$user_id}' , '{$company_id}' ) ";
-    $query = query($job_apply_query);
-    confirm($query);
+    if ($user_id) {
 
-    set_message("You applied for this Job!");
-    redirect("admin/candidate_index.php?id={$user_id}");
+        if ($job_id) {
+
+            set_message("Already Applied");
+            redirect("admin/candidate_index.php?id={$user_id}");
+        }
+    } else {
+
+
+
+        $job_apply_query = "INSERT INTO applications( job_id , user_id , company_id ) VALUES( '{$job_id}' , '{$user_id}' , '{$company_id}' ) ";
+        $query = query($job_apply_query);
+        confirm($query);
+
+        set_message("You applied for this Job!");
+        redirect("admin/candidate_index.php?id={$user_id}");
+    }
 }
